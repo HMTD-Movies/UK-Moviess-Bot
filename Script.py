@@ -93,17 +93,17 @@ Create One Link This :-
 <b>This Module only Works for My 👨‍✈️ Admins</b>
 
 <b>Commands and Usage :-</b>
-<b>• /logs - to get the rescent errors
-• /stats - to get status of files in db.
-• /delete - to delete a specific file from db.
-• /users - to get list of my users and ids.
-• /chats - to get list of the my chats and ids 
-• /leave  - to leave from a chat.
-• /disable  -  do disable a chat.
-• /ban  - to ban a user.
-• /unban  - to unban a user.
-• /channel - to get list of total connected channels
-• /broadcast - to broadcast a message to all users</b>"""
+<b>• /logs - to Get The Recent Errors
+• /stats - to Get Status Of Files 📂 in Database.
+• /delete - to Delete 🗑️ a Specific File 📂 From Database.
+• /users - to Get List of My Users and IDs.
+• /chats - to Get List of The My Chats and IDs
+• /leave  - to Leave From a Chat.
+• /disable  -  do Disable a Chat.
+• /ban  - to Ban a User.
+• /unban  - to Unban a User.
+• /channel - to Get List of Total Connected Channels 
+• /broadcast - to Broadcast a Message to All Users 📊</b>"""
 
     STATUS_TXT = """<b>🗃️ Total Files :</b> <code>{}</code> <b>Files</b>\n
 <b>👩🏻‍💻 Total Users :</b> <code>{}</code> <b>Users</b>\n
