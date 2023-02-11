@@ -12,7 +12,7 @@ logger.setLevel(logging.ERROR)
 async def addconnection(client, message):
     userid = message.from_user.id if message.from_user else None
     if not userid:
-        return await message.reply(f"<b>You are anonymous admin. Use /connect {message.chat.id} in PM</b>")
+        return await message.reply(f"<b>You are Anonymous Admin. Use /connect {message.chat.id} in PM</b>")
     chat_type = message.chat.type
 
     if chat_type == enums.ChatType.PRIVATE:
@@ -20,9 +20,9 @@ async def addconnection(client, message):
             cmd, group_id = message.text.split(" ", 1)
         except:
             await message.reply_text(
-                "<b>Enter in Correct ID!</b>\n\n"
-                "<code>/connect Group ID</code>\n\n"
-                "<i><b>Get Your Group ID by Adding This Bot to Your Group and Use</b>  <code>/id</code></i>",
+                "**Enter in Correct ID!\n\n"
+                "`/connect Group ID`\n\n"
+                "Get Your Group ID by Adding This Bot to Your Group and Use** `id`",
                 quote=True,
                 parse_mode=enums.ParseMode.MARKDOWN
             )
@@ -38,12 +38,12 @@ async def addconnection(client, message):
                 and st.status != enums.ChatMemberStatus.OWNER
                 and userid not in ADMINS
         ):
-            await message.reply_text("<b>You should be an Admin in Given Group!</b>", quote=True)
+            await message.reply_text("**You should be an Admin in Given Group!**", quote=True)
             return
     except Exception as e:
         logger.exception(e)
         await message.reply_text(
-            "<b>Invalid Group ID!\n\nIf correct, Make sure I'm Present in Your Group!!</b>",
+            "*"Invalid Group ID!\n\nIf correct, Make sure I'm Present in Your Group!!**",
             quote=True,
             parse_mode=enums.ParseMode.MARKDOWN
         )
@@ -58,14 +58,14 @@ async def addconnection(client, message):
             addcon = await add_connection(str(group_id), str(userid))
             if addcon:
                 await message.reply_text(
-                    f"<b>Successfully Connect to {title}\nNow You Can Manage Your Group From Here...!</b>",
+                    f"**Successfully Connect to {title}\nNow You Can Manage Your Group From Here...!**",
                     quote=True,
                     parse_mode=enums.ParseMode.MARKDOWN
                 )
                 if chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
                     await client.send_message(
                         userid,
-                        f"<b>Connected to {title} !</b>",
+                        f"**Connected to {title} !**",
                         parse_mode=enums.ParseMode.MARKDOWN
                     )
             else:
@@ -74,7 +74,7 @@ async def addconnection(client, message):
                     quote=True
                 )
         else:
-            await message.reply_text("<b>Add me as an Admin in Group</b>", quote=True)
+            await message.reply_text("**Add me as an Admin in Group**", quote=True)
     except Exception as e:
         logger.exception(e)
         await message.reply_text('<b>Some Error Occurred! Try Again Later.</b>', quote=True)
