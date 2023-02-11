@@ -33,7 +33,7 @@ class Media(Document):
 
 
 async def save_file(media):
-    """Save file in database"""
+    """<b>Save File 📂 in Database</b>"""
 
     # TODO: Find better way to get same file_id for same media to avoid duplicates
     file_id, file_ref = unpack_new_file_id(media.file_id)
@@ -49,14 +49,14 @@ async def save_file(media):
             caption=media.caption.html if media.caption else None,
         )
     except ValidationError:
-        logger.exception('Error occurred while saving file in database')
+        logger.exception('Error Occurred While Saving File in Database')
         return False, 2
     else:
         try:
             await file.commit()
         except DuplicateKeyError:      
             logger.warning(
-                f'{getattr(media, "file_name", "NO_FILE")} is already saved in database'
+                f'{getattr(media, "file_name", "NO_FILE")} is Already Saved in Database'
             )
 
             return False, 0
