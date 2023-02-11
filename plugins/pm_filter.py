@@ -181,7 +181,7 @@ async def advantage_spoll_choker(bot, query):
                 parse_mode=enums.ParseMode.HTML
 )
 
-            await asyncio.sleep(10)
+            await asyncio.sleep(60)
             await bot.delete()
 
 @Client.on_callback_query()
@@ -799,7 +799,7 @@ async def advantage_spell_chok(msg):
     gs_parsed = []
     if not g_s:
         bot = await msg.reply("I Couldn't Find any Movie 🎥 in that Name.")
-        await asyncio.sleep(8)
+        await asyncio.sleep(20)
         await bot.delete()
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
@@ -828,7 +828,7 @@ async def advantage_spell_chok(msg):
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
     if not movielist:
         bot = await msg.reply("I Couldn't Find Anything Related to That. Check your Spelling")
-        await asyncio.sleep(8)
+        await asyncio.sleep(20)
         await bot.delete()
         return
     SPELL_CHECK[msg.id] = movielist
