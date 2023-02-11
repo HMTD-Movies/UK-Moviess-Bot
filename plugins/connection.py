@@ -12,7 +12,7 @@ logger.setLevel(logging.ERROR)
 async def addconnection(client, message):
     userid = message.from_user.id if message.from_user else None
     if not userid:
-        return await message.reply(f"<b>You are Anonymous Admin. Use /connect {message.chat.id} in PM</b>")
+        return await message.reply(f"**You are Anonymous Admin. Use /connect {message.chat.id} in PM**")
     chat_type = message.chat.type
 
     if chat_type == enums.ChatType.PRIVATE:
@@ -43,7 +43,7 @@ async def addconnection(client, message):
     except Exception as e:
         logger.exception(e)
         await message.reply_text(
-            "*"Invalid Group ID!\n\nIf correct, Make sure I'm Present in Your Group!!**",
+            "**Invalid Group ID!\n\nIf correct, Make sure I'm Present in Your Group!!**",
             quote=True,
             parse_mode=enums.ParseMode.MARKDOWN
         )
@@ -70,14 +70,14 @@ async def addconnection(client, message):
                     )
             else:
                 await message.reply_text(
-                    "<b>You're already Connected to This Chat!</b>",
+                    "**You're already Connected to This Chat!**",
                     quote=True
                 )
         else:
             await message.reply_text("**Add me as an Admin in Group**", quote=True)
     except Exception as e:
         logger.exception(e)
-        await message.reply_text('<b>Some Error Occurred! Try Again Later.</b>', quote=True)
+        await message.reply_text('**Some Error Occurred! Try Again Later.**', quote=True)
         return
 
 
@@ -85,11 +85,11 @@ async def addconnection(client, message):
 async def deleteconnection(client, message):
     userid = message.from_user.id if message.from_user else None
     if not userid:
-        return await message.reply(f"<b>You are Anonymous Admin. Use /connect {message.chat.id} in PM</b>")
+        return await message.reply(f"**You are Anonymous Admin. Use /connect {message.chat.id} in PM**")
     chat_type = message.chat.type
 
     if chat_type == enums.ChatType.PRIVATE:
-        await message.reply_text("<b>Run /connections to View or Disconnect From Groups!</b>", quote=True)
+        await message.reply_text("**Run /connections to View or Disconnect From Groups!**", quote=True)
 
     elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
         group_id = message.chat.id
@@ -104,9 +104,9 @@ async def deleteconnection(client, message):
 
         delcon = await delete_connection(str(userid), str(group_id))
         if delcon:
-            await message.reply_text("<b>Successfully Disconnected From This Chat</b>", quote=True)
+            await message.reply_text("**Successfully Disconnected From This Chat**", quote=True)
         else:
-            await message.reply_text("<b>This Chat isn't Connected to me!\nDo /connect to Connect.</b>", quote=True)
+            await message.reply_text("**This Chat isn't Connected to me!\nDo /connect to Connect.**", quote=True)
 
 
 @Client.on_message(filters.private & filters.command(["connections"]))
@@ -116,7 +116,7 @@ async def connections(client, message):
     groupids = await all_connections(str(userid))
     if groupids is None:
         await message.reply_text(
-            "<b>There are no Active Connections!! Connect to some Groups First.</b>",
+            "**There are no Active Connections!! Connect to some Groups First.**",
             quote=True,
             parse_mode=enums.ParseMode.MARKDOWN
         )
@@ -139,13 +139,13 @@ async def connections(client, message):
             pass
     if buttons:
         await message.reply_text(
-            "<b>Connected Groups :-\n\n</b>",
+            "**Connected Groups :-\n\n**",
             reply_markup=InlineKeyboardMarkup(buttons),
             quote=True
         )
     else:
         await message.reply_text(
-            "<b>There are no Active Connections!! Connect to some Groups First.</b>",
+            "**There are no Active Connections!! Connect to some Groups First.**",
             quote=True,
             parse_mode=enums.ParseMode.MARKDOWN
         )
