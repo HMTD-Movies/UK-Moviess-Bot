@@ -42,16 +42,16 @@ SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'Star_Moviess_Tamil')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "True")), True)
 IMDB = is_enabled((environ.get('IMDB', "True")), True)
 SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "True")), True)
-CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "<b>[Star Movies Tamil](https://t.me/Star_Moviess_Tamil) - {file_caption}\n\n🎥 Get More Movies/Series Files 📂 in [Star Movies Tamil Bot](https://t.me/Star_Moviess_Tamil_Bot)</b>")
-BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", "<b>[Star Movies Tamil](https://t.me/Star_Moviess_Tamil) - {file_caption}\n\n🎥 Get More Movies/Series Files 📂 in [Star Movies Tamil Bot](https://t.me/Star_Moviess_Tamil_Bot)</b>")
-IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", "<b>🎥 Movie :- <a href={url}>{title}</a>\n\n🎭 Genres :- {genres}\n\n📆 Year :- <a href={url}/releaseinfo>{year}</a>\n\n🌟 Rating :- <a href={url}/ratings>{rating}</a> / 10 (Based on {votes} Users Ratings.)\n\n🎙️ Languages :- {languages}\n\n⏰ Duration :- {runtime} Minutes\n\n🕺 Director :- {director}\n\n🗺️ Countries :- {countries}\n\n📢 Update Channel :-</b>\n<a href=https://t.me/Star_Moviess_Tamil><b>Star Movies Tamil</b></a>")
+CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "<b>[www.HMTDMovies.tk](https://www.HMTDMovies.tk) - {file_caption}\n\n🎥 Get More Movies/Series Files 📂 in [UK Movies Bot](https://t.me/UK_Movies_Bot)\n\n📢 Update Channel :-\n[UK Movies Zone (Updates)](https://t.me/UK_Movies_Zone_Updates)\n\n🔥 Powered By :-\n[UK Studios Official](https://t.me/UK_Studios_Official)\n[HMTD Links](https://t.me/HMTD_Links)</b>")
+BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION)
+IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", "<b>🎥 Movie :- <a href={url}>{title}</a>\n\n🎭 Genres :- {genres}\n\n📆 Year :- <a href={url}/releaseinfo>{year}</a>\n\n🌟 Rating :- <a href={url}/ratings>{rating}</a> / 10 (Based on {votes} Users Ratings.)\n\n🎙️ Languages :- {languages}\n\n⏰ Duration :- {runtime} Minutes\n\n🕺 Director :- {director}\n\n🗺️ Countries :- {countries}\n\n📢 Update Channel :-</b>\n<a href=https://t.me/UK_Movies_Zone_Updates><b>UK Movies Zone Updates</b></a>\n\n<b>🔥 Powered By :-\n<a href=https://t.me/UK_Studios_Official><b></b>UK Studios Official</a>\n<a href=https://t.me/HMTD_Links><b></b>HMTD Links</a>\n\n🌐 Our Website :- <a href=https://www.HMTDMovies.tk><b></b>www.HMTDMovies.tk</a></b>")
 LONG_IMDB_DESCRIPTION = is_enabled(environ.get("LONG_IMDB_DESCRIPTION", "True"), True)
 SPELL_CHECK_REPLY = is_enabled(environ.get("SPELL_CHECK_REPLY", "True"), True)
 MAX_LIST_ELM = environ.get("MAX_LIST_ELM", None)
 INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', '-1001797626445'))
 FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).split()]
 MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
-PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "True")), True)
+PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), True)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "False")), True)
 
 LOG_STR = "Current Cusomized Configurations are:-\n"
@@ -78,11 +78,11 @@ if SELF_DELETE == "True":
     SELF_DELETE = True
 
     # Download Tutorial Button #
-DOWNLOAD_TEXT_NAME = "📥 HOW TO DOWNLOAD 📥"
-DOWNLOAD_TEXT_URL = "https://t.me/Star_Moviess_Tamil"
+DOWNLOAD_TEXT_NAME = "⚡ How To Download ⚡"
+DOWNLOAD_TEXT_URL = "https://t.me/UK_Movies_Zone_Updates"
 
    # Custom Caption Under Button #
 CAPTION_BUTTON = "🔥 Join Our Channel 🔥"
-CAPTION_BUTTON_URL = "https://t.me/Star_Moviess_Tamil"
+CAPTION_BUTTON_URL = "https://t.me/UK_Movies_Zone_Updates"
 
    # Auto Delete For Bot Sending Files #
