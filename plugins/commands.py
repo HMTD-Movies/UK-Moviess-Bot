@@ -287,7 +287,7 @@ async def channel_info(bot, message):
 async def log_file(bot, message):
     """Send Log File 📂"""
     try:
-        await message.reply_document('UK-Movies-Bot.log')
+        await message.reply_document('UKMoviesBot.log')
     except Exception as e:
         await message.reply(str(e))
 
