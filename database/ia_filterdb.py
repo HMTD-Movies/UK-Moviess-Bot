@@ -61,7 +61,7 @@ async def save_file(media):
 
             return False, 0
         else:
-            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is saved to database')
+            logger.info(f'{getattr(media, "file_name", "NO_FILE")} is Saved to Database')
             return True, 1
 
 
