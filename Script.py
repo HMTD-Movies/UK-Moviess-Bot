@@ -12,7 +12,7 @@ def is_enabled(value, default):
 
 class script(object):
     HOME_BUTTONURL_UPDATES = environ.get("HOME_BUTTONURL_UPDATES", 'https://tnlink.in/ref/KarthikUK')
-    START_TXT = environ.get("START_TXT", '''<b>Hello 👋🏻 {} ♥️,\nI'm an UK Studios Official Auto Filter Bot (Movie Search Bot) Maintained by <a href=https://t.me/UK_Movies_Zone_Updates><b></b>UK Movies Zone (Updates)</a>. We are Providing Tamil and Tamil Dubbed Movies. More Languages Coming Soon. Keep me Join to Our Official Channel to Receive Bot & Movies Updates in <a href=https://t.me/UK_Movies_Zone_Updates><b></b>UK Movies Zone (Updates)</a>. Check "😁 About" Button.</b>''')
+    START_TXT = environ.get("START_TXT", '''<b>Hello 👋🏻 {} ♥️,\nI'm an UK Studios Official <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a> Maintained by <a href=https://t.me/UK_Movies_Zone_Updates><b></b>UK Movies Zone (Updates)</a>. We are Providing Tamil and Tamil Dubbed Movies. More Languages Coming Soon. Keep me Join to Our Official Channel to Receive Bot & Movies Updates in <a href=https://t.me/UK_Movies_Zone_Updates><b></b>UK Movies Zone (Updates)</a>. Check "😁 About" Button.</b>''')
     HELP_TXT = """<b>Hello 👋🏻 {} ♥️,
 I have that Features.
 Create One Link This :-
@@ -34,11 +34,11 @@ Create One Link This :-
 <b>- Filter is the Feature Were Users Can set Automated Replies for a Particular Keyword and <a href=https://t.me/UK_Movies_Bot><b>Our Bot</b></a> will Respond Whenever a Keyword is Found the Message</b>
 
 <b>NOTE :-</b>
-<b>1. <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a> Should have Admin Privillage.
-2. Only Admins can Add Filters in a Chat.
+<b>1. <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a> Should have 👨‍✈️ Admin Privillage.
+2. Only 👨‍✈️ Admins can Add Filters in a Chat.
 3. Alert Buttons have a Limit of 64 Characters.</b>
 
-<b>Commands and Usage :</b>
+<b>Commands and Usage :-</b>
 <b>• /filter - Add a Filter in Chat
 • /filters - list all the Filters of a Chat
 • /del - Delete a Specific Filter in Chat 
@@ -47,7 +47,7 @@ Create One Link This :-
 
 <b>- <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a> Supports Both URL and Alert Inline Buttons.</b>
 
-<b>NOTE :</b>
+<b>NOTE :-</b>
 <b>1. Telegram will Not Allows you to Send Buttons Without Any Content, so Content is Mandatory.
 2. <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a> supports Buttons With Any Telegram Media/File type.
 3. Buttons Should be Properly Parsed as Markdown Format</b>
@@ -55,44 +55,44 @@ Create One Link This :-
 <b>URL Buttons :-</b>
 <code>[Button Text](buttonurl:https://t.me/UK_Movies_Zone_Updates)</code>
 
-<b>Alert Buttons :</b>
+<b>Alert Buttons :-</b>
 <code>[Button Text](buttonalert:This is an Alert Message)</code>"""
     AUTOFILTER_TXT = """<b>Help :-</b> <b>Auto Filter</b>
 
-<b>NOTE :</b>
-<b>1. Make Me The Admin of Your Channel if it's Private.
+<b>NOTE :-</b>
+<b>1. Make Me The 👨‍✈️ Admin of Your Channel if it's Private.
 2. Make Sure that Your Channel Doesn't Contains Camrips, Porn and Fake Files 📂.
 3. Forward the last Message to me with Quotes.
  I'll Add all the Files 📂 in that Channel to My Database.</b>"""
-    CONNECTION_TXT = """<b>Help :</b> <b>Connections</b>
+    CONNECTION_TXT = """<b>Help :-</b> <b>Connections</b>
 
-<b>- Used to connect bot to PM for managing filters 
-- it helps to avoid spamming in groups.</b>
+<b>- Used to Connect Bot to PM for Managing Filters 
+- it Helps To Avoid Spamming in Groups.</b>
 
-<b>NOTE :</b>
-<b>1. Only admins can add a connection.
-2. Send</b> <code>/connect</code> <b>for connecting me to ur PM</b>
-
-<b>Commands and Usage :</b>
-<b>• /connect  - connect a particular chat to your PM
-• /disconnect  - disconnect from a chat
-• /connections - list all your connections</b>"""
-    EXTRAMOD_TXT = """<b>Help :</b> <b>Extra Modules</b>
-
-<b>NOTE :</b>
-<b>these are the extra features of Auto Filter Bot (Movie Search Bot)</b>
+<b>NOTE :-</b>
+<b>1. Only 👨‍✈️ Admins can Add a Connection.
+2. Send</b> <code>/connect</code> <b>for Connecting Me To Your PM</b>
 
 <b>Commands and Usage :</b>
-<b>• /id - get id of a specified user.
-• /info  - get information about a user.
-• /imdb  - get the film information from IMDb source.
-• /search  - get the film information from various sources.</b>"""
-    ADMIN_TXT = """<b>Help :</b> <b>Admin mods</b>
+<b>• /connect  - Connect a Particular Chat to Your PM
+• /disconnect  - Disconnect From a Chat 
+• /connections - List All Your Connections</b>"""
+    EXTRAMOD_TXT = """<b>Help :-</b> <b>Extra Modules</b>
 
-<b>NOTE :</b>
-<b>This module only works for my admins</b>
+<b>NOTE :-</b>
+<b>These are the Extra Features of Our <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a></b>
 
 <b>Commands and Usage :</b>
+<b>• /id - Get ID of a Specified User.
+• /info  - Get Information About a User.
+• /imdb  - Get the Movie 🎥 Information From IMDB Source.
+• /search  - Get the Movie 🎥 Information from Various Sources.</b>"""
+    ADMIN_TXT = """<b>Help :-</b> <b>👨‍✈️ Admin Mods</b>
+
+<b>NOTE :-</b>
+<b>This Module only Works for My 👨‍✈️ Admins</b>
+
+<b>Commands and Usage :-</b>
 <b>• /logs - to get the rescent errors
 • /stats - to get status of files in db.
 • /delete - to delete a specific file from db.
@@ -104,11 +104,13 @@ Create One Link This :-
 • /unban  - to unban a user.
 • /channel - to get list of total connected channels
 • /broadcast - to broadcast a message to all users</b>"""
+
     STATUS_TXT = """<b>🗃️ Total Files :</b> <code>{}</code> <b>Files</b>\n
 <b>👩🏻‍💻 Total Users :</b> <code>{}</code> <b>Users</b>\n
 <b>👥 Total Groups :</b> <code>{}</code> <b>Groups</b>\n
 <b>💾 Used Storage :</b> <code>{}</code>\n
 <b>🆓 Free Storage :</b> <code>{}</code>"""
+
     LOG_TEXT_G = """<b>#New_Group</b>
     
 <b>᚛› Group ⪼ {}(<code>{}</code>)</b>
@@ -121,4 +123,4 @@ Create One Link This :-
 <b>᚛› Name - {}</b>
 """
 
-REQ_TO_ADMIN = """<b>This Movie Not Found my Database or Not Released This Movie \n\nRequest to Admin</b>"""
+REQ_TO_ADMIN = """<b>😒 Currently Unavailable to My Database or Not Released This Movie 🎥 ! We are Really Sorry for Inconvenience..!\n Have Patience..! Our Greatest 👨‍✈️ Admins Will Upload This Movie 🎥 As Soon as Possible.!\n\nRequest to Our Greatest 👨‍✈️ Admins</b>"""
