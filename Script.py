@@ -118,3 +118,4 @@ This module only works for my admins
 <b>᚛› 𝐈𝐃 - <code>{}</code></b>
 <b>᚛› 𝐍𝐚𝐦𝐞 - {}</b>
 """
+REQ_TO_ADMIN = """<b>This Movie Not Found my Database or Not Released This Movie \n\nRequest to Admin</b>"""
