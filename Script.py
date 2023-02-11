@@ -11,111 +11,112 @@ def is_enabled(value, default):
         return default
 
 class script(object):
-    HOME_BUTTONURL_UPDATES = environ.get("HOME_BUTTONURL_UPDATES", 'https://omegalinks.in/ref/GreyMatter6458')
-    START_TXT = environ.get("START_TXT", '''<b>Hello {} 👋🏻 Im Search Bot I can share Movies and Series 😁.</b>
+    HOME_BUTTONURL_UPDATES = environ.get("HOME_BUTTONURL_UPDATES", 'https://tnlink.in/ref/KarthikUK')
+    START_TXT = environ.get("START_TXT", '''<b>Hello 👋🏻 {} ♥️,\nI'm an Star Movies Tamil's Official Auto Filter Bot (Movie Search Bot) Maintained by <a href=https://t.me/Star_Moviess_Tamil><b></b>Star Movies Tamil</a>. We are Providing Tamil and Tamil Dubbed Movies. More Languages Coming Soon. Keep me Join to Our Official Channel to Receive Bot & Movies Updates in <a href=https://t.me/Star_Moviess_Tamil><b></b>Star Movies Tamil</a>. Check "😁 About" Button.</b>''')
+    HELP_TXT = """<b>Hello 👋🏻 {},
+I have that Features.
+Create One Link This :
+» I will Create For One Bot You. But Paid
+» Contact Me <a href=https://t.me/Star_Movies_Karthik><b>Karthik</b></a></b>"""
+    ABOUT_TXT = """<b><i>🤖 My Name : <a href=https://t.me/Star_Moviess_Bot><b>Star Movies Bot</b></a>\n
+🧑🏻‍💻 Developer : <a href=https://t.me/Star_Movies_Karthik><b>Karthik</b></a>\n
+📝 Language : Pyrogram\n
+📚 Framework : Python3\n
+📡 Hosted on : VPS\n
+📢 Updates Channel : <a href=https://t.me/Star_Moviess_Tamil><b></b>Star Movies Tamil</a>\n</b></i>"""
+    SOURCE_TXT = """<b>Create One Like This :</b>
+» I will Create One Bot For You. But Paid<b>
+» Contact Me</b> <a href=https://t.me/Star_Movies_Karthik><b>Karthik</b></a>"""
+    MANUELFILTER_TXT = """<b>Help :</b> <b>Filters</b>
 
-<i>Aᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴛᴏ sᴇᴇ ᴛʜᴇ ᴍᴀɢɪᴄ ᴏʀ ʀᴇᴀᴅ ᴍᴏʀᴇ ғʀᴏᴍ ᴛʜᴇ ᴍᴇɴᴜ ʙᴇʟᴏᴡ</i>''')
-    HELP_TXT = """𝙷𝙴𝚈 {}
-𝙷𝙴𝚁𝙴 𝙸𝚂 𝙼𝚈 𝙷𝙴𝙻𝙿 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂."""
-    ABOUT_TXT = """<b><i>🤖 ᴍʏ ɴᴀᴍᴇ : <a href=https://t.me/OTT_Movies_Search_Bot><b>OTT Search Bot</b></a>\n
-👨‍💻 ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href=https://t.me/GreyMatter_Owner><b>GreyMatter's</b></a>\n
-📝 ʟᴀɴɢᴜᴀɢᴇ : ᴘʏʀᴏɢʀᴀᴍ\n
-📚 ꜰʀᴀᴍᴇᴡᴏʀᴋ : ᴘʏᴛʜᴏɴ 3\n
-📡 ʜᴏsᴛᴇᴅ ᴏɴ : ʜᴇʀᴏᴋᴜ\n
-📢 ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ : <a href=https://t.me/OTT_Updated><b></b>ᴄʟɪᴄᴋ ʜᴇʀᴇ</a>\n
-🌟 ᴠᴇʀsɪᴏɴ : ᴠ 4.0\n</b></i>"""
-    SOURCE_TXT = """<b>𝐂𝐫𝐞𝐚𝐭𝐞 𝐎𝐧𝐞 𝐋𝐢𝐤𝐞 𝐓𝐡𝐢𝐬:</b>
-» I will Create One Bot For You<b>
-» Contact Me @GreyMatter_Owner<b>"""
-    MANUELFILTER_TXT = """Help: <b>Filters</b>
+<b>- Filter is the feature were users can set automated replies for a particular keyword and Search Bot will respond whenever a keyword is found the message</b>
 
-- Filter is the feature were users can set automated replies for a particular keyword and Search Bot will respond whenever a keyword is found the message
-
-<b>NOTE:</b>
-1. Search Bot should have admin privillage.
+<b>NOTE :</b>
+<b>1. Search Bot should have admin privillage.
 2. only admins can add filters in a chat.
-3. alert buttons have a limit of 64 characters.
+3. alert buttons have a limit of 64 characters.</b>
 
-<b>Commands and Usage:</b>
-• /filter - <code>add a filter in chat</code>
-• /filters - <code>list all the filters of a chat</code>
-• /del - <code>delete a specific filter in chat</code>
-• /delall - <code>delete the whole filters in a chat (chat owner only)</code>"""
-    BUTTON_TXT = """Help: <b>Buttons</b>
+<b>Commands and Usage :</b>
+<b>• /filter - add a filter in chat
+• /filters - list all the filters of a chat
+• /del - delete a specific filter in chat
+• /delall - delete the whole filters in a chat (chat owner only)</b>"""
+    BUTTON_TXT = """<b>Help :</b> <b>Buttons</b>
 
-- Search Bot Supports both url and alert inline buttons.
+<b>- Search Bot Supports both url and alert inline buttons.</b>
 
-<b>NOTE:</b>
-1. Telegram will not allows you to send buttons without any content, so content is mandatory.
+<b>NOTE :</b>
+<b>1. Telegram will not allows you to send buttons without any content, so content is mandatory.
 2. Search Bot supports buttons with any telegram media type.
-3. Buttons should be properly parsed as markdown format
+3. Buttons should be properly parsed as markdown format</b>
 
-<b>URL buttons:</b>
-<code>[Button Text](buttonurl:https://t.me/GreyMatter_Owner)</code>
+<b>URL buttons :</b>
+<code>[Button Text](buttonurl:https://t.me/HMTD_Karthik)</code>
 
-<b>Alert buttons:</b>
+<b>Alert buttons :</b>
 <code>[Button Text](buttonalert:This is an alert message)</code>"""
-    AUTOFILTER_TXT = """Help: <b>Auto Filter</b>
+    AUTOFILTER_TXT = """<b>Help :</b> <b>Auto Filter</b>
 
-<b>NOTE:</b>
-1. Make me the admin of your channel if it's private.
+<b>NOTE :</b>
+<b>1. Make me the admin of your channel if it's private.
 2. make sure that your channel does not contains camrips, porn and fake files.
 3. Forward the last message to me with quotes.
- I'll add all the files in that channel to my db."""
-    CONNECTION_TXT = """Help: <b>Connections</b>
+ I'll add all the files in that channel to my db.</b>"""
+    CONNECTION_TXT = """<b>Help :</b> <b>Connections</b>
 
-- Used to connect bot to PM for managing filters 
-- it helps to avoid spamming in groups.
+<b>- Used to connect bot to PM for managing filters 
+- it helps to avoid spamming in groups.</b>
 
-<b>NOTE:</b>
-1. Only admins can add a connection.
-2. Send <code>/connect</code> for connecting me to ur PM
+<b>NOTE :</b>
+<b>1. Only admins can add a connection.
+2. Send</b> <code>/connect</code> <b>for connecting me to ur PM</b>
 
-<b>Commands and Usage:</b>
-• /connect  - <code>connect a particular chat to your PM</code>
-• /disconnect  - <code>disconnect from a chat</code>
-• /connections - <code>list all your connections</code>"""
-    EXTRAMOD_TXT = """Help: <b>Extra Modules</b>
+<b>Commands and Usage :</b>
+<b>• /connect  - connect a particular chat to your PM
+• /disconnect  - disconnect from a chat
+• /connections - list all your connections</b>"""
+    EXTRAMOD_TXT = """<b>Help :</b> <b>Extra Modules</b>
 
-<b>NOTE:</b>
-these are the extra features of Search Bot
+<b>NOTE :</b>
+<b>these are the extra features of Auto Filter Bot (Movie Search Bot)</b>
 
-<b>Commands and Usage:</b>
-• /id - <code>get id of a specified user.</code>
-• /info  - <code>get information about a user.</code>
-• /imdb  - <code>get the film information from IMDb source.</code>
-• /search  - <code>get the film information from various sources.</code>"""
-    ADMIN_TXT = """Help: <b>Admin mods</b>
+<b>Commands and Usage :</b>
+<b>• /id - get id of a specified user.
+• /info  - get information about a user.
+• /imdb  - get the film information from IMDb source.
+• /search  - get the film information from various sources.</b>"""
+    ADMIN_TXT = """<b>Help :</b> <b>Admin mods</b>
 
-<b>NOTE:</b>
-This module only works for my admins
+<b>NOTE :</b>
+<b>This module only works for my admins</b>
 
-<b>Commands and Usage:</b>
-• /logs - <code>to get the rescent errors</code>
-• /stats - <code>to get status of files in db.</code>
-• /delete - <code>to delete a specific file from db.</code>
-• /users - <code>to get list of my users and ids.</code>
-• /chats - <code>to get list of the my chats and ids </code>
-• /leave  - <code>to leave from a chat.</code>
-• /disable  -  <code>do disable a chat.</code>
-• /ban  - <code>to ban a user.</code>
-• /unban  - <code>to unban a user.</code>
-• /channel - <code>to get list of total connected channels</code>
-• /broadcast - <code>to broadcast a message to all users</code>"""
-    STATUS_TXT = """★ 𝚃𝙾𝚃𝙰𝙻 𝙵𝙸𝙻𝙴𝚂: <code>{}</code>
-★ 𝚃𝙾𝚃𝙰𝙻 𝚄𝚂𝙴𝚁𝚂: <code>{}</code>
-★ 𝚃𝙾𝚃𝙰𝙻 𝙲𝙷𝙰𝚃𝚂: <code>{}</code>
-★ 𝚄𝚂𝙴𝙳 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱
-★ 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱"""
-    LOG_TEXT_G = """#𝐍𝐞𝐰𝐆𝐫𝐨𝐮𝐩
+<b>Commands and Usage :</b>
+<b>• /logs - to get the rescent errors
+• /stats - to get status of files in db.
+• /delete - to delete a specific file from db.
+• /users - to get list of my users and ids.
+• /chats - to get list of the my chats and ids 
+• /leave  - to leave from a chat.
+• /disable  -  do disable a chat.
+• /ban  - to ban a user.
+• /unban  - to unban a user.
+• /channel - to get list of total connected channels
+• /broadcast - to broadcast a message to all users</b>"""
+    STATUS_TXT = """<b>🗃️ Total Files :</b> <code>{}</code> <b>Files</b>\n
+<b>👩🏻‍💻 Total Users :</b> <code>{}</code> <b>Users</b>\n
+<b>👥 Total Groups :</b> <code>{}</code> <b>Groups</b>\n
+<b>💾 Used Storage :</b> <code>{}</code>\n
+<b>🆓 Free Storage :</b> <code>{}</code>"""
+    LOG_TEXT_G = """<b>#New_Group</b>
     
-<b>᚛› 𝐆𝐫𝐨𝐮𝐩 ⪼ {}(<code>{}</code>)</b>
-<b>᚛› 𝐓𝐨𝐭𝐚𝐥 𝐌𝐞𝐦𝐛𝐞𝐫𝐬 ⪼ <code>{}</code></b>
-<b>᚛› 𝐀𝐝𝐝𝐞𝐝 𝐁𝐲 ⪼ {}</b>
+<b>᚛› Group ⪼ {}(<code>{}</code>)</b>
+<b>᚛› Total Members ⪼ <code>{}</code></b>
+<b>᚛› Added By ⪼ {}</b>
 """
-    LOG_TEXT_P = """#𝐍𝐞𝐰𝐔𝐬𝐞𝐫  
+    LOG_TEXT_P = """<b>#New_User</b>
     
-<b>᚛› 𝐈𝐃 - <code>{}</code></b>
-<b>᚛› 𝐍𝐚𝐦𝐞 - {}</b>
+<b>᚛› ID - <code>{}</code></b>
+<b>᚛› Name - {}</b>
 """
+
 REQ_TO_ADMIN = """<b>This Movie Not Found my Database or Not Released This Movie \n\nRequest to Admin</b>"""
