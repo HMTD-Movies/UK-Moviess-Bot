@@ -4,7 +4,7 @@ import ast
 import math
 from utils import get_shortlink
 from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
-from Script import script
+from Script import script, REQ_TO_ADMIN
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, \
     make_inactive
@@ -136,6 +136,12 @@ async def next_page(bot, query):
                 InlineKeyboardButton("𝗡𝗲𝘅𝘁 ➡️", callback_data=f"next_{req}_{key}_{n_offset}")
             ],
         )
+    btn.insert(0, [
+        InlineKeyboardButton('😎 Group', url='https://t.me/HMTD_Discussion_Group'),
+        InlineKeyboardButton('☺️ Share', url='https://t.me/share/url?url=I%27m%20an%20UK%20Movies%20Official%20Auto%20Filter%20Bot%20%28Movie%20Search%20Bot%29.%20Just%20Search%20Then%20You%20Can%20Get%20Files..%E2%9D%A4%EF%B8%8F%0A%0A%F0%9F%93%A2%20Join%20Our%20Update%20Channel%20%3A-%0A%40UK_Movies_Zone_Updates%0A%0A%F0%9F%94%A5%20Powered%20By%20%3A-%0A%40UK_Studios_Official%0A%40HMTD_Links%0A%20%20%0A%F0%9F%91%87%20Join%20%3A-%0A%20https%3A//t.me/UK_Movies_Zone'),
+        InlineKeyboardButton('📢 Channel', url='https://t.me/UK_Movies_Zone_Updates')
+        ]
+    )
     try:
         await query.edit_message_reply_markup(
             reply_markup=InlineKeyboardMarkup(btn)
@@ -164,7 +170,17 @@ async def advantage_spoll_choker(bot, query):
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
         else:
-            k = await query.message.edit('𝚃𝙷𝙸𝚂 𝙼𝙾𝚅𝙸𝙴 I𝚂 𝙽𝙾𝚃 𝚈𝙴𝚃 𝚁𝙴𝙻𝙴𝙰𝚂𝙴𝙳 𝙾𝚁 𝙰𝙳𝙳𝙴𝙳 𝚃𝙾 𝙳𝙰𝚃𝚂𝙱𝙰𝚂𝙴 💌')
+            k = await query.message.edit(
+                text=(REQ_TO_ADMIN),
+                reply_markup=InlineKeyboardMarkup(
+                                       [[
+                                         InlineKeyboardButton('⭕ Request to Admin ⭕', url="https://t.me/HMTD_Feedback_Bot")
+                                       
+                                       ]]
+                ),
+                parse_mode=enums.ParseMode.HTML
+)
+
             await asyncio.sleep(10)
             await k.delete()
 
@@ -704,6 +720,12 @@ async def auto_filter(client, msg, spoll=False):
         btn.append(
             [InlineKeyboardButton(text="🗓 1/1", callback_data="pages")]
         )
+    btn.insert(0, [
+        InlineKeyboardButton('😎 Group', url='https://t.me/HMTD_Discussion_Group'),
+        InlineKeyboardButton('☺️ Share', url='https://t.me/share/url?url=I%27m%20an%20UK%20Movies%20Official%20Auto%20Filter%20Bot%20%28Movie%20Search%20Bot%29.%20Just%20Search%20Then%20You%20Can%20Get%20Files..%E2%9D%A4%EF%B8%8F%0A%0A%F0%9F%93%A2%20Join%20Our%20Update%20Channel%20%3A-%0A%40UK_Movies_Zone_Updates%0A%0A%F0%9F%94%A5%20Powered%20By%20%3A-%0A%40UK_Studios_Official%0A%40HMTD_Links%0A%20%20%0A%F0%9F%91%87%20Join%20%3A-%0A%20https%3A//t.me/UK_Movies_Zone'),
+        InlineKeyboardButton('📢 Channel', url='https://t.me/UK_Movies_Zone_Updates')
+        ]
+    )
     imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
     TEMPLATE = settings['template']
     if imdb:
