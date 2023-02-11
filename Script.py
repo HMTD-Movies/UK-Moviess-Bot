@@ -60,10 +60,10 @@ Create One Link This :-
     AUTOFILTER_TXT = """<b>Help :-</b> <b>Auto Filter</b>
 
 <b>NOTE :</b>
-<b>1. Make me the admin of your channel if it's private.
-2. make sure that your channel does not contains camrips, porn and fake files.
-3. Forward the last message to me with quotes.
- I'll add all the files in that channel to my db.</b>"""
+<b>1. Make Me The Admin of Your Channel if it's Private.
+2. Make Sure that Your Channel Doesn't Contains Camrips, Porn and Fake Files 📂.
+3. Forward the last Message to me with Quotes.
+ I'll Add all the Files 📂 in that Channel to My Database.</b>"""
     CONNECTION_TXT = """<b>Help :</b> <b>Connections</b>
 
 <b>- Used to connect bot to PM for managing filters 
