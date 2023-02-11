@@ -12,50 +12,52 @@ def is_enabled(value, default):
 
 class script(object):
     HOME_BUTTONURL_UPDATES = environ.get("HOME_BUTTONURL_UPDATES", 'https://tnlink.in/ref/KarthikUK')
-    START_TXT = environ.get("START_TXT", '''<b>Hello 👋🏻 {} ♥️,\nI'm an Star Movies Tamil's Official Auto Filter Bot (Movie Search Bot) Maintained by <a href=https://t.me/Star_Moviess_Tamil><b></b>Star Movies Tamil</a>. We are Providing Tamil and Tamil Dubbed Movies. More Languages Coming Soon. Keep me Join to Our Official Channel to Receive Bot & Movies Updates in <a href=https://t.me/Star_Moviess_Tamil><b></b>Star Movies Tamil</a>. Check "😁 About" Button.</b>''')
-    HELP_TXT = """<b>Hello 👋🏻 {},
+    START_TXT = environ.get("START_TXT", '''<b>Hello 👋🏻 {} ♥️,\nI'm an UK Studios Official Auto Filter Bot (Movie Search Bot) Maintained by <a href=https://t.me/UK_Movies_Zone_Updates><b></b>UK Movies Zone (Updates)</a>. We are Providing Tamil and Tamil Dubbed Movies. More Languages Coming Soon. Keep me Join to Our Official Channel to Receive Bot & Movies Updates in <a href=https://t.me/UK_Movies_Zone_Updates><b></b>UK Movies Zone (Updates)</a>. Check "😁 About" Button.</b>''')
+    HELP_TXT = """<b>Hello 👋🏻 {} ♥️,
 I have that Features.
-Create One Link This :
+Create One Link This :-
 » I will Create For One Bot You. But Paid
-» Contact Me <a href=https://t.me/Star_Movies_Karthik><b>Karthik</b></a></b>"""
-    ABOUT_TXT = """<b><i>🤖 My Name : <a href=https://t.me/Star_Moviess_Bot><b>Star Movies Bot</b></a>\n
-🧑🏻‍💻 Developer : <a href=https://t.me/Star_Movies_Karthik><b>Karthik</b></a>\n
-📝 Language : Pyrogram\n
-📚 Framework : Python3\n
-📡 Hosted on : VPS\n
-📢 Updates Channel : <a href=https://t.me/Star_Moviess_Tamil><b></b>Star Movies Tamil</a>\n</b></i>"""
-    SOURCE_TXT = """<b>Create One Like This :</b>
+» Contact Me <a href=https://t.me/HMTD_Karthik><b>Karthik</b></a></b>"""
+    ABOUT_TXT = """<b><i>🤖 My Name :- <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a>\n
+🧑🏻‍💻 Developer :- <a href=https://t.me/HMTD_Karthik><b>Karthik</b></a>\n
+📝 Language :- Pyrogram\n
+📚 Framework :- Python3\n
+📡 Hosted on :- VPS\n
+📢 Updates Channel :- <a href=https://t.me/UK_Movies_Zone_Updates><b></b>UK Movies Zone (Updates)</a>\n
+🌐 Website :- <a href=https://www.HMTDMovies.tk><b></b>www.HMTDMovies.tk</a>\n
+🌟 Version :- 4.2</b></i>"""
+    SOURCE_TXT = """<b>Create One Like This :-</b>
 » I will Create One Bot For You. But Paid<b>
-» Contact Me</b> <a href=https://t.me/Star_Movies_Karthik><b>Karthik</b></a>"""
-    MANUELFILTER_TXT = """<b>Help :</b> <b>Filters</b>
+» Contact Me</b> <a href=https://t.me/HMTD_Karthik><b>Karthik</b></a>"""
+    MANUELFILTER_TXT = """<b>Help :-</b> <b>Filters</b>
 
-<b>- Filter is the feature were users can set automated replies for a particular keyword and Search Bot will respond whenever a keyword is found the message</b>
+<b>- Filter is the Feature Were Users Can set Automated Replies for a Particular Keyword and <a href=https://t.me/UK_Movies_Bot><b>Our Bot</b></a> will Respond Whenever a Keyword is Found the Message</b>
 
-<b>NOTE :</b>
-<b>1. Search Bot should have admin privillage.
-2. only admins can add filters in a chat.
-3. alert buttons have a limit of 64 characters.</b>
+<b>NOTE :-</b>
+<b>1. <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a> Should have Admin Privillage.
+2. Only Admins can Add Filters in a Chat.
+3. Alert Buttons have a Limit of 64 Characters.</b>
 
 <b>Commands and Usage :</b>
-<b>• /filter - add a filter in chat
-• /filters - list all the filters of a chat
-• /del - delete a specific filter in chat
-• /delall - delete the whole filters in a chat (chat owner only)</b>"""
-    BUTTON_TXT = """<b>Help :</b> <b>Buttons</b>
+<b>• /filter - Add a Filter in Chat
+• /filters - list all the Filters of a Chat
+• /del - Delete a Specific Filter in Chat 
+• /delall - Delete the Whole Filters in a Chat (Chat Owner Only)</b>"""
+    BUTTON_TXT = """<b>Help :-</b> <b>Buttons</b>
 
-<b>- Search Bot Supports both url and alert inline buttons.</b>
+<b>- <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a> Supports Both URL and Alert Inline Buttons.</b>
 
 <b>NOTE :</b>
-<b>1. Telegram will not allows you to send buttons without any content, so content is mandatory.
-2. Search Bot supports buttons with any telegram media type.
-3. Buttons should be properly parsed as markdown format</b>
+<b>1. Telegram will Not Allows you to Send Buttons Without Any Content, so Content is Mandatory.
+2. <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a> supports Buttons With Any Telegram Media/File type.
+3. Buttons Should be Properly Parsed as Markdown Format</b>
 
-<b>URL buttons :</b>
-<code>[Button Text](buttonurl:https://t.me/HMTD_Karthik)</code>
+<b>URL Buttons :-</b>
+<code>[Button Text](buttonurl:https://t.me/UK_Movies_Zone_Updates)</code>
 
-<b>Alert buttons :</b>
-<code>[Button Text](buttonalert:This is an alert message)</code>"""
-    AUTOFILTER_TXT = """<b>Help :</b> <b>Auto Filter</b>
+<b>Alert Buttons :</b>
+<code>[Button Text](buttonalert:This is an Alert Message)</code>"""
+    AUTOFILTER_TXT = """<b>Help :-</b> <b>Auto Filter</b>
 
 <b>NOTE :</b>
 <b>1. Make me the admin of your channel if it's private.
