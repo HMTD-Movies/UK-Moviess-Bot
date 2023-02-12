@@ -268,7 +268,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ])
 
         await query.message.edit_text(
-            f"<b>Group Name :- {title}\nGroup ID :- `{group_id}`</b>",
+            f"**Group Name :- {title}\nGroup ID :- `{group_id}`**",
             reply_markup=keyboard,
             parse_mode=enums.ParseMode.MARKDOWN
         )
