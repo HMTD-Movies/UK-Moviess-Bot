@@ -1,5 +1,5 @@
 {
-    "name": "ᎯℕUℛᎯᎶ",
+    "name": "Karthik",
     "description": "Clone Of ᎯℕUℛᎯᎶ & More Features Added",
     "stack": "container",
     "logo": "https://telegra.ph/file/9ee1253e36b37a1665ce2.jpg",
@@ -76,7 +76,7 @@
     "formation": {
         "worker": {
             "quantity": 1,
-            "size": "free"
+            "size": "eco"
         }
     }
 }
