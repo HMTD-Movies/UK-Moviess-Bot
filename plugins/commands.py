@@ -524,3 +524,57 @@ async def save_template(client, message):
     template = message.text.split(" ", 1)[1]
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"<b>Successfully Upgraded Your Template For {title} to\n\n{template}</b>")
+
+@Client.on_message(filters.command("send") & filters.user(ADMINS))
+async def send_msg(bot, message):
+    if message.reply_to_message:
+        target_id = message.text.split(" ", 1)[1]
+        out = "Users Saved In DB Are:\n\n"
+        success = False
+        try:
+            user = await bot.get_users(target_id)
+            users = await db.get_all_users()
+            async for usr in users:
+                out += f"{usr['id']}"
+                out += '\n'
+            if str(user.id) in str(out):
+                await message.reply_to_message.copy(int(user.id))
+                success = True
+            else:
+                success = False
+            if success:
+                await message.reply_text(f"<b>Your Message has Been Successfully Send to {user.mention}.</b>")
+            else:
+                await message.reply_text("<b>This User Didn't Started This Bot Yet !</b>")
+        except Exception as e:
+            await message.reply_text(f"<b>Error :- {e}</b>")
+    else:
+        await message.reply_text("<b>Use This Command as a Reply to any Message Using the Target Chat ID. For Example :- /send userid</b>")
+
+@Client.on_message(filters.command("deletefiles") & filters.user(ADMINS))
+async def deletemultiplefiles(bot, message):
+    chat_type = message.chat.type
+    if chat_type != enums.ChatType.PRIVATE:
+        return await message.reply_text(f"<b>Hello 👋🏻 {message.from_user.mention} ❤️, This co6mmand Won't Work in Groups. It Will only Works on My PM !</b>")
+    else:
+        pass
+    try:
+        keyword = message.text.split(" ", 1)[1]
+    except:
+        return await message.reply_text(f"<b>Hey {message.from_user.mention}, Give me a keyword along with the command to delete files.</b>")
+    k = await bot.send_message(chat_id=message.chat.id, text=f"<b>Fetching Files for Your Query {keyword} on DB... Please wait...</b>")
+    files, next_offset, total = await get_bad_files(keyword)
+    await k.edit_text(f"<b>Found {total} Files for Your Query {keyword} !\n\nFile Deletion Process will start in 5 Seconds !</b>")
+    await asyncio.sleep(5)
+    deleted = 0
+    for file in files:
+        await k.edit_text(f"<b>Process Started for Deleting Files From DB. Successfully Deleted {str(deleted)} Files From DB for Your Query {keyword} !\n\nPlease wait...</b>")
+        file_ids = file.file_id
+        file_name = file.file_name
+        result = await Media.collection.delete_one({
+            '_id': file_ids,
+        })
+        if result.deleted_count:
+            logger.info(f'File Found for Your Query {keyword}! Successfully Deleted {file_name} from Database.')
+        deleted += 1
+    await k.edit_text(text=f"<b>Process Completed for File Deletion !\n\nSuccessfully Deleted {str(deleted)} Files from Database for your Query {keyword}.</b>")
