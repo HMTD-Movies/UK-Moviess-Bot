@@ -61,7 +61,7 @@ Create One Link This :-
 
 <b>NOTE :-</b>
 <b>1. Make Me The 👨🏻‍✈️ Admin of Your Channel if it's Private.
-2. Make Sure that Your Channel Doesn't Contains Camrips, Porn and Fake Files 📂.
+2. Make Sure that Your Channel Doesn't Contains CAMRip, PreDVD, Porn and Fake Files 📂.
 3. Forward the last Message to me with Quotes.
  I'll Add all the Files 📂 in that Channel to My Database.</b>"""
     CONNECTION_TXT = """<b>Help :-</b> <b>Connections</b>
@@ -100,10 +100,13 @@ New Features ✨
 
 <b>Commands and Usage :-</b>
 <b>• /logs - to Get The Recent Errors
+• /send - Send Message to Spacific User 🤵🏻
 • /stats - to Get Status Of Files 📂 in Database.
 • /delete - to Delete 🗑️ a Specific File 📂 From Database.
+• /deleteall - to Delete 🗑️ to All Files 📂 From Database.
+• /deletefiles - to Delete 🗑️ PreDVD and CAMRip Files 📂 From Database.
 • /users - to Get List of My Users and IDs.
-• /chats - to Get List of The My Chats and IDs
+• /chats - to Get List of The My Chats and IDs.
 • /leave  - to Leave From a Chat.
 • /disable  -  do Disable a Chat.
 • /ban  - to Ban a User.
@@ -112,11 +115,11 @@ New Features ✨
 • /broadcast - to Broadcast a Message to All Users 📊
 • /group_broadcast - to Broadcast a Message to All Groups 👥</b>"""
 
-    STATUS_TXT = """<b>🗃️ Total Files :</b> <code>{}</code> <b>Files</b>\n
-<b>👩🏻‍💻 Total Users :</b> <code>{}</code> <b>Users</b>\n
-<b>👥 Total Groups :</b> <code>{}</code> <b>Groups</b>\n
-<b>💾 Used Storage :</b> <code>{}</code>\n
-<b>🆓 Free Storage :</b> <code>{}</code>"""
+    STATUS_TXT = """<b>🗃️ Total Files :-</b> <code>{}</code> <b>Files</b>\n
+<b>👩🏻‍💻 Total Users :-</b> <code>{}</code> <b>Users</b>\n
+<b>👥 Total Groups :-</b> <code>{}</code> <b>Groups</b>\n
+<b>💾 Used Storage :-</b> <code>{}</code>\n
+<b>🆓 Free Storage :-</b> <code>{}</code>"""
 
     LOG_TEXT_G = """<b>#New_Group</b>
     
