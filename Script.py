@@ -101,19 +101,21 @@ New Features ✨
 <b>Commands and Usage :-</b>
 <b>• /logs - to Get The Recent Errors
 • /send - Send Message to Spacific User 🤵🏻
-• /stats - to Get Status Of Files 📂 in Database.
+• /stats - to Get Status 📊 Of Files 📂 in Database.
+• /status - to Get Status 📊 Of This Bot 🤖
 • /delete - to Delete 🗑️ a Specific File 📂 From Database.
 • /deleteall - to Delete 🗑️ to All Files 📂 From Database.
 • /deletefiles - to Delete 🗑️ PreDVD and CAMRip Files 📂 From Database.
 • /users - to Get List of My Users and IDs.
 • /chats - to Get List of The My Chats and IDs.
 • /leave  - to Leave From a Chat.
-• /disable  -  do Disable a Chat.
+• /disable  - to Disable a Chat.
 • /ban  - to Ban a User.
 • /unban  - to Unban a User.
 • /channel - to Get List of Total Connected Channels 
 • /broadcast - to Broadcast a Message to All Users 📊
-• /group_broadcast - to Broadcast a Message to All Groups 👥</b>"""
+• /group_broadcast - to Broadcast a Message to All Groups 👥</b>
+• /restart - to Restart The Bot 🤖 With Heroku"""
 
     STATUS_TXT = """<b>🗃️ Total Files :-</b> <code>{}</code> <b>Files</b>\n
 <b>👩🏻‍💻 Total Users :-</b> <code>{}</code> <b>Users</b>\n
