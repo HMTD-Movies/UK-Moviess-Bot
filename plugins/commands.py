@@ -633,7 +633,7 @@ async def deletemultiplefiles(bot, message):
         parse_mode=enums.ParseMode.HTML
     )
 
-@Client.on_message(filters.command("telegraph") & filters.private)
+@Client.on_message(filters.command("graph") & filters.private)
 async def telegraph_upload(bot, update):
     replied = update.reply_to_message
     if not replied:
@@ -645,7 +645,7 @@ async def telegraph_upload(bot, update):
         return
     text = await update.reply_text(text="<b>Downloading to My Server ...</b>", disable_web_page_preview=True)   
     media = await update.reply_to_message.download()   
-    await text.edit_text(text="<b>Downloading Completed. Now I am Uploading to telegra.ph Link ...</b>", disable_web_page_preview=True)                                            
+    await text.edit_text(text="<b>Downloading Completed. Now I am Uploading to graph.org Link...</b>", disable_web_page_preview=True)                                            
     try:
         response = upload_file(media)
     except Exception as error:
@@ -658,11 +658,11 @@ async def telegraph_upload(bot, update):
         print(error)
         return    
     await text.edit_text(
-        text=f"<b>Your Phone or Video Link :-</b>\n\n<b>https://telegra.ph{response[0]}</b>",
+        text=f"<b>Your Photo or Video Link :-</b>\n\n<b>https://graph.org{response[0]}</b>",
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup( [[
-            InlineKeyboardButton(text="Open Link", url=f"https://telegra.ph{response[0]}"),
-            InlineKeyboardButton(text="Share Link", url=f"https://telegram.me/share/url?url=https://telegra.ph{response[0]}")
+            InlineKeyboardButton(text="Open Link", url=f"https://graph.org{response[0]}"),
+            InlineKeyboardButton(text="Share Link", url=f"https://telegram.me/share/url?url=https://graph.org{response[0]}")
             ],[
             InlineKeyboardButton(text="✗ Close ✗", callback_data="close")
             ]])
