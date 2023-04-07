@@ -264,36 +264,36 @@ async def start(client, message):
 
 @Client.on_message(filters.command(["help"]) & filters.private, group=1)
 async def help(client, message):
-    buttons = [[
-        InlineKeyboardButton('🏠 Home 🏠', callback_data='start'),
-        InlineKeyboardButton('😁 About', callback_data='about')
-    ],[
-        InlineKeyboardButton('Close 🔐', callback_data='close_data')
-    ]]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    await message.reply_photo(
-        photo=random.choice(PICS),
-        caption=script.HELP_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-        reply_markup=reply_markup,
-        parse_mode=enums.ParseMode.HTML
+        buttons = [[
+            InlineKeyboardButton('Manuel Filter', callback_data='manuelfilter'),
+            InlineKeyboardButton('Auto Filter', callback_data='autofilter')
+        ], [
+            InlineKeyboardButton('Connections', callback_data='coct'),
+            InlineKeyboardButton('Extra Mods', callback_data='extra')
+        ], [
+            InlineKeyboardButton('🏠 Home 🏠', callback_data='start'),
+            InlineKeyboardButton('📊 Status', callback_data='stats')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.HELP_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
         )
-
 
 @Client.on_message(filters.command(["about"]) & filters.private, group=1)
 async def about(client, message):
-    
-    buttons = [[
-        InlineKeyboardButton('🏠 Home 🏠', callback_data='start'),
-        InlineKeyboardButton('😎 Help', callback_data='help')
-    ],[
-        InlineKeyboardButton('Close 🔐', callback_data='close_data')
-    ]]
-    reply_markup = InlineKeyboardMarkup(buttons)
-    await message.reply_photo(
-        photo=random.choice(PICS),
-        caption=script.ABOUT_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
-        reply_markup=reply_markup,
-        parse_mode=enums.ParseMode.HTML
+        buttons = [[
+            InlineKeyboardButton('🏠 Home 🏠', callback_data='start'),
+            InlineKeyboardButton('😎 Help', callback_data='help')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.ABOUT_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
         )
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
