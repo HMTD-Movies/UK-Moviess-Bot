@@ -20,6 +20,13 @@ from database.connections_mdb import active_connection
 import re
 import json
 import base64
+from pyrogram import Client, filters
+import datetime
+import time
+from database.users_chats_db import db
+from info import ADMINS
+from utils import broadcast_messages
+import asyncio
 import re, asyncio, time, shutil, psutil, os, sys
 from pyrogram import Client, filters, enums
 from pyrogram.types import *
@@ -295,6 +302,38 @@ async def about(client, message):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+
+@Client.on_message(filters.command("group_broadcast") & filters.user(ADMINS) & filters.reply)
+async def grp_brodcst(bot, message):
+    chats = await db.get_all_chats()
+    b_msg = message.reply_to_message
+    sts = await message.reply_text(
+        text='<b>Broadcasting Your Messages to Connected Groups 😁...</b>'
+    )
+    start_time = time.time()
+    total_chats = await db.total_chat_count()
+    done = 0
+    failed =0
+
+    success = 0
+    async for chat in chats:
+        pti, sh = await broadcast_messages(int(chat['id']), b_msg)
+        if pti:
+            success += 1
+        elif pti == False:
+            if sh == "Blocked":
+                blocked+=1
+            elif sh == "Deleted":
+                deleted += 1
+            elif sh == "Error":
+                failed += 1
+        done += 1
+        await asyncio.sleep(2)
+        if not done % 20:
+            await sts.edit(f"<b>Broadcast in Progress :-\n\nTotal Chats {total_chats}\nCompleted :- {done} / {total_chats}\nSuccess :- {success}\nFailed :- {failed}</b>")    
+    time_taken = datetime.timedelta(seconds=int(time.time()-start_time))
+    await sts.edit(f"<b>Broadcast Completed :-\nCompleted in {time_taken} Seconds.\n\nTotal Chats {total_chats}\nCompleted :- {done} / {total_chats}\nSuccess :- {success}\nFailed :- {failed}</b>")
+
 
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
