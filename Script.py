@@ -74,8 +74,8 @@ Create One Link This :-
 2. Send</b> <code>/connect</code> <b>for Connecting Me To Your PM</b>
 
 <b>Commands and Usage :</b>
-<b>• /connect  - Connect a Particular Chat to Your PM
-• /disconnect  - Disconnect From a Chat 
+<b>• /connect - Connect a Particular Chat to Your PM
+• /disconnect - Disconnect From a Chat 
 • /connections - List All Your Connections</b>"""
     EXTRAMOD_TXT = """<b>Help :-</b> <b>Extra Modules</b>
 
@@ -84,9 +84,10 @@ Create One Link This :-
 
 <b>Commands and Usage :</b>
 <b>• /id - Get ID of a Specified User.
-• /info  - Get Information About a User.
-• /imdb  - Get the Movie 🎥 Information From IMDB Source.
-• /search  - Get the Movie 🎥 Information from Various Sources.
+• /info - Get Information About a User.
+• /imdb - Get the Movie 🎥 Information From IMDB Source.
+• /search - Get the Movie 🎥 Information from Various Sources.
+• /set_template - Set a New Custom IMDB Template For Individual Groups. (Chat Admin 👨🏻‍✈️ Only)
 
 New Features ✨
 
@@ -114,8 +115,8 @@ New Features ✨
 • /unban  - to Unban a User.
 • /channel - to Get List of Total Connected Channels 
 • /broadcast - to Broadcast a Message to All Users 📊
-• /group_broadcast - to Broadcast a Message to All Groups 👥</b>
-• /restart - to Restart The Bot 🤖 With Heroku"""
+• /group_broadcast - to Broadcast a Message to All Groups 👥
+• /restart - to Restart The Bot 🤖 With Heroku</b>"""
 
     STATUS_TXT = """<b>🗃️ Total Files :-</b> <code>{}</code> <b>Files</b>\n
 <b>👩🏻‍💻 Total Users :-</b> <code>{}</code> <b>Users</b>\n
