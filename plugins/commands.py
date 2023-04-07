@@ -555,7 +555,7 @@ async def send_msg(bot, message):
 async def deletemultiplefiles(bot, message):
     chat_type = message.chat.type
     if chat_type != enums.ChatType.PRIVATE:
-        return await message.reply_text(f"<b>Hello 👋🏻 {message.from_user.mention} ❤️, This co6mmand Won't Work in Groups. It Will only Works on My PM !</b>")
+        return await message.reply_text(f"<b>Hello 👋🏻 {message.from_user.mention} ❤️, This command Won't Work in Groups. It Will only Works on My PM !</b>")
     else:
         pass
     try:
@@ -578,3 +578,51 @@ async def deletemultiplefiles(bot, message):
             logger.info(f'File Found for Your Query {keyword}! Successfully Deleted {file_name} from Database.')
         deleted += 1
     await k.edit_text(text=f"<b>Process Completed for File Deletion !\n\nSuccessfully Deleted {str(deleted)} Files from Database for your Query {keyword}.</b>")
+
+@Client.on_message(filters.command("send") & filters.user(ADMINS))
+async def send_msg(bot, message):
+    if message.reply_to_message:
+        target_id = message.text.split(" ", 1)[1]
+        out = "Users Saved In DB Are:\n\n"
+        success = False
+        try:
+            user = await bot.get_users(target_id)
+            users = await db.get_all_users()
+            async for usr in users:
+                out += f"{usr['id']}"
+                out += '\n'
+            if str(user.id) in str(out):
+                await message.reply_to_message.copy(int(user.id))
+                success = True
+            else:
+                success = False
+            if success:
+                await message.reply_text(f"<b>Your message has been successfully send to {user.mention}.</b>")
+            else:
+                await message.reply_text("<b>This user didn't started this bot yet !</b>")
+        except Exception as e:
+            await message.reply_text(f"<b>Error: {e}</b>")
+    else:
+        await message.reply_text("<b>Use this command as a reply to any message using the target chat id. For eg: /send userid</b>")
+
+@Client.on_message(filters.command("deletefiles") & filters.user(ADMINS))
+async def deletemultiplefiles(bot, message):
+    chat_type = message.chat.type
+    if chat_type != enums.ChatType.PRIVATE:
+        return await message.reply_text(f"<b>Hey {message.from_user.mention}, This command won't work in groups. It only works on my PM !</b>")
+    else:
+        pass
+    try:
+        keyword = message.text.split(" ", 1)[1]
+    except:
+        return await message.reply_text(f"<b>Hey {message.from_user.mention}, Give me a keyword along with the command to delete files.</b>")
+    btn = [[
+       InlineKeyboardButton("Yes, Continue !", callback_data=f"killfilesdq#{keyword}")
+       ],[
+       InlineKeyboardButton("No, Abort operation !", callback_data="close_data")
+    ]]
+    await message.reply_text(
+        text="<b>Are you sure? Do you want to continue?\n\nNote:- This could be a destructive action !</b>",
+        reply_markup=InlineKeyboardMarkup(btn),
+        parse_mode=enums.ParseMode.HTML
+    )
