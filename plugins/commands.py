@@ -643,14 +643,14 @@ async def telegraph_upload(bot, update):
     if not file_info:
         await update.reply_text("**Not Supported Media!**")
         return
-    text = await update.reply_text(text="<b>Downloading to My Server ...</b>", disable_web_page_preview=True, quote=True)   
+    text = await update.reply_text(text="<b>Downloading to My Server ...</b>", disable_web_page_preview=True)   
     media = await update.reply_to_message.download()   
-    await text.edit_text(text="<b>Downloading Completed. Now I am Uploading to telegra.ph Link ...</b>", disable_web_page_preview=True, quote=True)                                            
+    await text.edit_text(text="<b>Downloading Completed. Now I am Uploading to telegra.ph Link ...</b>", disable_web_page_preview=True)                                            
     try:
         response = upload_file(media)
     except Exception as error:
         print(error)
-        await text.edit_text(text=f"**Error :- {error}**", disable_web_page_preview=True, quote=True)       
+        await text.edit_text(text=f"**Error :- {error}**", disable_web_page_preview=True)       
         return    
     try:
         os.remove(media)
@@ -687,7 +687,7 @@ async def share_text(client, message):
             )                                                   
         return
     await message.reply_text(
-        text=f"**Here is Your Sharing Text 👇\n\nhttps://telegram.me/share/url?url=**" + quote(input_text),
+        text=f"**Here is Your Sharing Text 👇\n\nhttps://telegram.me/share/url?url=quote(input_text)**",
         reply_to_message_id=reply_id,
         quote=True,
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("♂️ Share", url=f"https://telegram.me/share/url?url={quote(input_text)}")]])       
