@@ -2,8 +2,8 @@ import os
 import logging
 import random
 import asyncio
-import os
-import asyncio
+from urllib.parse import quote
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
 from telegraph import upload_file
@@ -643,14 +643,14 @@ async def telegraph_upload(bot, update):
     if not file_info:
         await update.reply_text("**Not Supported Media!**")
         return
-    text = await update.reply_text(text="<code>Downloading to My Server ...</code>", disable_web_page_preview=True)   
+    text = await update.reply_text(text="<b>Downloading to My Server ...</b>", disable_web_page_preview=True, quote=True)   
     media = await update.reply_to_message.download()   
-    await text.edit_text(text="<b>Downloading Completed. Now I am Uploading to telegra.ph Link ...</b>", disable_web_page_preview=True)                                            
+    await text.edit_text(text="<b>Downloading Completed. Now I am Uploading to telegra.ph Link ...</b>", disable_web_page_preview=True, quote=True)                                            
     try:
         response = upload_file(media)
     except Exception as error:
         print(error)
-        await text.edit_text(text=f"**Error :- {error}**", disable_web_page_preview=True)       
+        await text.edit_text(text=f"**Error :- {error}**", disable_web_page_preview=True, quote=True)       
         return    
     try:
         os.remove(media)
@@ -660,6 +660,7 @@ async def telegraph_upload(bot, update):
     await text.edit_text(
         text=f"<b>Link :-</b>\n\n<b>https://graph.org{response[0]}</b>",
         disable_web_page_preview=True,
+        quote=True,
         reply_markup=InlineKeyboardMarkup( [[
             InlineKeyboardButton(text="Open Link", url=f"https://graph.org{response[0]}"),
             InlineKeyboardButton(text="Share Link", url=f"https://telegram.me/share/url?url=https://graph.org{response[0]}")
@@ -667,4 +668,27 @@ async def telegraph_upload(bot, update):
             InlineKeyboardButton(text="✗ Close ✗", callback_data="close")
             ]])
         )
-    
+
+@Client.on_message(filters.command(["share_text", "share", "sharetext",]))
+async def share_text(client, message):
+    reply = message.reply_to_message
+    reply_id = message.reply_to_message.id if message.reply_to_message else message.id
+    input_split = message.text.split(None, 1)
+    if len(input_split) == 2:
+        input_text = input_split[1]
+    elif reply and (reply.text or reply.caption):
+        input_text = reply.text or reply.caption
+    else:
+        await message.reply_text(
+            text=f"**Notice :-\n\n1. Reply Any Messages.\n2. No Media Support\n\nAny Question Join Support Chat**",                
+            reply_to_message_id=reply_id,
+            quote=True,               
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("👥 Support Chat", url=f"https://t.me/HMTD_Discussion_Group")]])
+            )                                                   
+        return
+    await message.reply_text(
+        text=f"**Here is Your Sharing Text 👇\n\nhttps://telegram.me/share/url?url=**" + quote(input_text),
+        reply_to_message_id=reply_id,
+        quote=True,
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("♂️ Share", url=f"https://telegram.me/share/url?url={quote(input_text)}")]])       
+    )    
