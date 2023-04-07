@@ -658,12 +658,11 @@ async def telegraph_upload(bot, update):
         print(error)
         return    
     await text.edit_text(
-        text=f"<b>Link :-</b>\n\n<b>https://graph.org{response[0]}</b>",
+        text=f"<b>Your Phone or Video Link :-</b>\n\n<b>https://telegra.ph{response[0]}</b>",
         disable_web_page_preview=True,
-        quote=True,
         reply_markup=InlineKeyboardMarkup( [[
-            InlineKeyboardButton(text="Open Link", url=f"https://graph.org{response[0]}"),
-            InlineKeyboardButton(text="Share Link", url=f"https://telegram.me/share/url?url=https://graph.org{response[0]}")
+            InlineKeyboardButton(text="Open Link", url=f"https://telegra.ph{response[0]}"),
+            InlineKeyboardButton(text="Share Link", url=f"https://telegram.me/share/url?url=https://telegra.ph{response[0]}")
             ],[
             InlineKeyboardButton(text="✗ Close ✗", callback_data="close")
             ]])
@@ -687,7 +686,7 @@ async def share_text(client, message):
             )                                                   
         return
     await message.reply_text(
-        text=f"**Here is Your Sharing Text 👇\n\nhttps://telegram.me/share/url?url=quote(input_text)**",
+        text=f"**Here is Your Sharing Text 👇\n\nhttps://telegram.me/share/url?url={quote(input_text)}**",
         reply_to_message_id=reply_id,
         quote=True,
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("♂️ Share", url=f"https://telegram.me/share/url?url={quote(input_text)}")]])       
