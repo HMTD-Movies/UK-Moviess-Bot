@@ -1033,7 +1033,15 @@ async def short(link):
     
     # Send the text
     try:
-        shorten_urls += ""
+        await m.reply_text(
+                    shorten_urls += ""
+            ),
+            quote=True,
+            parse_mode=ParseMode.HTML,
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("Request", url="https://telegram.me/TG_Karthik")], [InlineKeyboardButton("🚫 Close", url=close_data)]]
+            ),
+        )
         return shorten_urls
     except Exception as error:
         return error
