@@ -949,10 +949,13 @@ async def echo(client, message):
 		code =find(int(message.chat.id))
 	except Exception as e:
 		await message.reply_text(f" Error : {e}\nclick /start ........")
-		return 
-		
-	if code :
-			try:
+		return 		
+	
+	        if (message.reply_to_message):
+		        try:
+			        lgcd = message.text.split("/tr")
+			        lg_cd = lgcd[1].lower().replace(" ", "")
+			        tr_text = message.reply_to_message.text
 				translator = Translator()
 				translation = translator.translate(message.text,dest = code)
 			except Exception as e:
