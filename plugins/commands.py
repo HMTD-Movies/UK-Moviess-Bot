@@ -885,7 +885,7 @@ async def stickerid(bot, message):
     else: 
        await message.reply("<b>Oops !! Not a sticker file</b>")
 
-@Client.on_message(filters.private & filters.command(["translater"]) & filters.text)
+@Client.on_message(filters.command(["translater"]) & filters.text)
 async def echo(client, message):
 	keybord1= InlineKeyboardMarkup( [
         [   InlineKeyboardButton("Tamil",callback_data = "ta"),
