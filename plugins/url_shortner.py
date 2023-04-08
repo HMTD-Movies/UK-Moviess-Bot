@@ -12,7 +12,7 @@ GPLINKS_API = os.environ.get("GPLINKS_API", "b0ee7d1fda4422c62f402fd0abfb89fd7e7
 
 reply_markup = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton("𝘊𝘭𝘰𝘴𝘦", callback_data='close_data')
+        InlineKeyboardButton("🚫 Close", callback_data='close_data')
         ]]
     )
 
