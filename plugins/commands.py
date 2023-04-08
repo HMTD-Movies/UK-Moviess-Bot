@@ -922,9 +922,7 @@ async def left(client,message):
 		except :
 			print("error")
 	else:
-			 ms = await message.reply_text("You can Use This Command by using reply to message")
-			 await ms.delete()
-
+			 ms = await message.reply_text("**You can Use This Command by using Reply to Message**")
 
 @Client.on_message(filters.private & filters.command(["translater"]))
 async def echo(client, message):
