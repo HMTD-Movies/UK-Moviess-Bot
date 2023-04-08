@@ -885,7 +885,7 @@ async def stickerid(bot, message):
     else: 
        await message.reply("<b>Oops !! Not a sticker file</b>")
 
-@Client.on_message(filters.user(ADMIN) & filters.command(["find"]))
+@Client.on_message(filters.user(ADMINS) & filters.command(["find"]))
 async def findmenb(bot, message):
 		id = message.text.split("/find")
 		user_id = id[1].replace(" ", "")
