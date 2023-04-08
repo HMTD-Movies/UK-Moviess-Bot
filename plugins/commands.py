@@ -8,7 +8,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
 from telegraph import upload_file
-from database.gtrans_mdb import find, insert
+from database.gtrans_mdb import find, insert, find_one
 from utils import get_file_id
 from Script import script
 import os
@@ -885,6 +885,11 @@ async def stickerid(bot, message):
     else: 
        await message.reply("<b>Oops !! Not a sticker file</b>")
 
+@Client.on_message(filters.user(ADMIN) & filters.command(["find"]))
+async def findmenb(bot, message):
+		id = message.text.split("/find")
+		user_id = id[1].replace(" ", "")
+		await message.reply_text(find_one(int(user_id)))
             
 @Client.on_message(filters.private & filters.command(["translater"]))
 async def echo(client, message):
@@ -942,7 +947,7 @@ async def echo(client, message):
 			except Exception as e:
 					await message.reply_text(f"Translated from **{translation.src}** To **{translation.dest}**\n\n```{translation.text}```\n\n join @lntechnical")
 	else:
-		await  message.reply_text("Select language 👇",reply_to_message_id = message.message_id, reply_markup =keybord1)
+		await  message.reply_text("Select language 👇",reply_to_message_id = message.message.id, reply_markup =keybord1)
 
 @Client.on_callback_query()
 async def translate_text(bot,update):
