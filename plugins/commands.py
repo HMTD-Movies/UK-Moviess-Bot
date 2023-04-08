@@ -876,11 +876,11 @@ async def stop_button(bot, message):
 
 BITLY_API = os.environ.get("BITLY_API", "aa2132168583d283fb288625d9352f2c5835512a")
 CUTTLY_API = os.environ.get("CUTTLY_API", "bd3a3ab946d7598ee459331dac9e9568e3d66")
-SHORTIO_API = os.environ.get("SHORTIO_API", "pk_IGYL9NLmUHntt6rr")
 EZ4SHORT_API = os.environ.get("EZ4SHORT_API", "e41618d805b3c4256dfa99abde6ef11fc7629c47")
 TINYURL_API = os.environ.get("TINYURL_API", "iRkhyhlmfJ07cFVsFV0NpvX6dOWZIwPglbq8jQDuSBMqAEk5Y81BX04ejVQk")
 DROPLINK_API = os.environ.get("DROPLINK_API", "1d85e33efc4969b36e0f6c0a017aaaefd8accccc")
 TNLINK_API = os.environ.get("TNLINK_API", "d03a53149bf186ac74d58ff80d916f7a79ae5745")
+URLOPEN_API = os.environ.get("URLOPEN_API", "")
 
 reply_markup = InlineKeyboardMarkup(
         [[
@@ -923,14 +923,14 @@ async def inline_short(bot, update):
     )
 
 async def short(link):
-    shorten_urls = "**--Shortened URLs--**\n\n"
+    shorten_urls = "**--Shortened URLs--**\n"
     
     # Bit.ly Shortener
     if BITLY_API:
         try:
             s = Shortener(api_key=BITLY_API)
             url = s.bitly.short(link)
-            shorten_urls += f"\n**Bit.ly :- {url}**\n"
+            shorten_urls += f"\n**1) Bit.ly :- {url}**\n"
         except Exception as error:
             print(f"Bit.ly Error :- {error}")
         
@@ -938,7 +938,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.clckru.short(link)
-        shorten_urls += f"\n**Clck.ru :- {url}**\n"
+        shorten_urls += f"\n**2) Clck.ru :- {url}**\n"
     except Exception as error:
         print(f"Click.ru Error :- {error}")
     
@@ -947,7 +947,7 @@ async def short(link):
         try:
             s = Shortener(api_key=CUTTLY_API)
             url = s.cuttly.short(link)
-            shorten_urls += f"\n**Cutt.ly :- {url}**\n"
+            shorten_urls += f"\n**3) Cutt.ly :- {url}**\n"
         except Exception as error:
             print(f"Cutt.ly Error :- {error}")
     
@@ -955,7 +955,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.dagd.short(link)
-        shorten_urls += f"\n**Da.gd :- {url}**\n"
+        shorten_urls += f"\n**4) Da.gd :- {url}**\n"
     except Exception as error:
         print(f"Da.gd Error :- {error}")
     
@@ -963,7 +963,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.isgd.short(link)
-        shorten_urls += f"\n**Is.gd :- {url}**\n"
+        shorten_urls += f"\n**5) Is.gd :- {url}**\n"
     except Exception as error:
         print(f"Is.gd Error :- {error}")
     
@@ -971,27 +971,10 @@ async def short(link):
     try:
         s = Shortener()
         url = s.osdb.short(link)
-        shorten_urls += f"\n**Osdb.link :- {url}**\n"
+        shorten_urls += f"\n**6) Osdb.link :- {url}**\n"
     except Exception as error:
         print(f"Osdb.link Error :- {error}")
-        
-    # Short.io Shortener
-    if SHORTIO_API:
-        try:
-            s = Shortener(api_key=SHORTIO_API)
-            url = s.shortio.short(link)
-            shorten_urls += f"\n**Short.io :- {url}**\n"
-        except Exception as error:
-            print(f"Short.io Error :- {error}")
-    
-    # TinyURL.com Shortener
-    try:
-        s = Shortener(api_key=TINYURL_API)
-        url = s.tinyurl.short(link)
-        shorten_urls += f"\n**TinyURL.com :- {url}**\n"
-    except Exception as error:
-        print(f"TinyURL.com Error :- {error}")
-    
+                
     # Droplink.co Shortener
     try:
         api_url = "https://droplink.co/api" 
@@ -1000,7 +983,7 @@ async def short(link):
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**Droplink.co :- {url}**\n"
+                shorten_urls += f"\n**7) Droplink.co :- {url}**\n"
     except Exception as error:
         print(f"Droplink.co Error :- {error}")
 
@@ -1012,9 +995,17 @@ async def short(link):
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**TNLink.in :- {url}**\n"
+                shorten_urls += f"\n**8) TNLink.in :- {url}**\n"
     except Exception as error:
         print(f"TNLink.in Error :- {error}")
+
+    # TinyURL.com Shortener
+    try:
+        s = Shortener(api_key=TINYURL_API)
+        url = s.tinyurl.short(link)
+        shorten_urls += f"\n**9) TinyURL.com :- {url}**\n"
+    except Exception as error:
+        print(f"TinyURL.com Error :- {error}")
     
     # Ez4short.com Shortener
     try:
@@ -1024,9 +1015,21 @@ async def short(link):
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**Ez4short.com :- {url}**\n"
+                shorten_urls += f"\n**10) Ez4short.com :- {url}**\n"
     except Exception as error:
-        print(f"Ez4short Error :- {error}")
+        print(f"Ez4short.com Error :- {error}")
+
+    # URLopen.net Shortener
+    try:
+        api_url = "https://urlopen.net/api" 
+        params = {'api': URLOPEN_API, 'url': link}
+        async with aiohttp.ClientSession() as session:
+            async with session.get(api_url, params=params, raise_for_status=True) as response:
+                data = await response.json()
+                url = data["shortenedUrl"]
+                shorten_urls += f"\n**11) URLopen.net :- {url}**\n"
+    except Exception as error:
+        print(f"URLopen.net Error :- {error}")
     
     # Send the text
     try:
