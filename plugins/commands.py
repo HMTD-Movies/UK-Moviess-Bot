@@ -893,6 +893,7 @@ async def reply_shortens(bot, update):
     message = await update.reply_text(
         text="**Analysing Your Link...**",
         disable_web_page_preview=True,
+        reply_markup=reply_markup,
         quote=True
     )
     link = update.matches[0].group(0)
@@ -1033,14 +1034,7 @@ async def short(link):
     
     # Send the text
     try:
-        await m.reply_text(
-                    shorten_urls += ""
-            ),
-            quote=True,
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("Request", url="https://telegram.me/TG_Karthik")], [InlineKeyboardButton("🚫 Close", url=close_data)]]
-            ),
-        )
+        shorten_urls += ""
+        return shorten_urls
     except Exception as error:
         return error
