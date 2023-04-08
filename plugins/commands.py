@@ -885,9 +885,6 @@ URLOPEN_API = os.environ.get("URLOPEN_API", "")
 reply_markup = InlineKeyboardMarkup(
         [[
         InlineKeyboardButton("Request", callback_data='https://t.me/TG_Karthik')
-        ]],
-        [[
-        InlineKeyboardButton("🚫 Close", callback_data='close_data')
         ]]
     )
 
