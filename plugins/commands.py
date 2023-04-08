@@ -925,11 +925,7 @@ async def echo(client, message):
 		return 	
 
 	if code :
-
-		        try:
-			        lgcd = message.text.split("/translater")
-			        lg_cd = lgcd[1].lower().replace(" ", "")
-			        tr_text = message.reply_to_message.text
+			try:
 				translator = Translator()
 				translation = translator.translate(message.text,dest = code)
 			except Exception as e:
@@ -1149,9 +1145,6 @@ async def translate_text(bot,update):
       	await update.message.edit("Select language 👇",reply_markup =keybord6)
       else :
       		try:
-			lgcd = message.text.split("/translater")
-			lg_cd = lgcd[1].lower().replace(" ", "")
-			tr_text = message.reply_to_message.text
       			translator = Translator()
       			translation = translator.translate(tr_text,dest = cb_data)
       		except Exception as e:
