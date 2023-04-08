@@ -878,6 +878,9 @@ BITLY_API = os.environ.get("BITLY_API", "aa2132168583d283fb288625d9352f2c5835512
 CUTTLY_API = os.environ.get("CUTTLY_API", "bd3a3ab946d7598ee459331dac9e9568e3d66")
 SHORTIO_API = os.environ.get("SHORTIO_API", "pk_IGYL9NLmUHntt6rr")
 EZ4SHORT_API = os.environ.get("EZ4SHORT_API", "e41618d805b3c4256dfa99abde6ef11fc7629c47")
+TINYURL_API = os.environ.get("TINYURL_API", "iRkhyhlmfJ07cFVsFV0NpvX6dOWZIwPglbq8jQDuSBMqAEk5Y81BX04ejVQk")
+DROPLINK_API = os.environ.get("DROPLINK_API", "1d85e33efc4969b36e0f6c0a017aaaefd8accccc")
+TNLINK_API = os.environ.get("TNLINK_API", "d03a53149bf186ac74d58ff80d916f7a79ae5745")
 
 reply_markup = InlineKeyboardMarkup(
         [[
@@ -920,116 +923,100 @@ async def inline_short(bot, update):
     )
 
 async def short(link):
-    shorten_urls = "**--Shorted URLs--**\n"
+    shorten_urls = "**--Shortened URLs--**\n\n"
     
-    # Bitly.com Shortener
+    # Bit.ly Shortener
     if BITLY_API:
         try:
             s = Shortener(api_key=BITLY_API)
             url = s.bitly.short(link)
-            shorten_urls += f"\n**Bitly.com :- {url}**"
+            shorten_urls += f"\n**Bit.ly :- {url}**\n"
         except Exception as error:
-            print(f"Bitly.com error :- {error}")
-    
-    # Chilp.it Shortener
-    try:
-        s = Shortener()
-        url = s.chilpit.short(link)
-        shorten_urls += f"\n**Chilp.it :-** {url}"
-    except Exception as error:
-        print(f"Chilp.it error :- {error}")
-    
-    # Clck.ru shorten
+            print(f"Bit.ly Error :- {error}")
+        
+    # Clck.ru Shortener
     try:
         s = Shortener()
         url = s.clckru.short(link)
-        shorten_urls += f"\n**Clck.ru :-** {url}"
+        shorten_urls += f"\n**Clck.ru :- {url}**\n"
     except Exception as error:
-        print(f"Click.ru error :- {error}")
+        print(f"Click.ru Error :- {error}")
     
-    # Cutt.ly shorten
+    # Cutt.ly Shortener
     if CUTTLY_API:
         try:
             s = Shortener(api_key=CUTTLY_API)
             url = s.cuttly.short(link)
-            shorten_urls += f"\n**Cutt.ly :- {url}**"
+            shorten_urls += f"\n**Cutt.ly :- {url}**\n"
         except Exception as error:
-            print(f"Cutt.ly error :- {error}")
+            print(f"Cutt.ly Error :- {error}")
     
-    # Da.gd shorten
+    # Da.gd Shortener
     try:
         s = Shortener()
         url = s.dagd.short(link)
-        shorten_urls += f"\n**Da.gd :-** {url}"
+        shorten_urls += f"\n**Da.gd :- {url}**\n"
     except Exception as error:
-        print(f"Da.gd error :- {error}")
+        print(f"Da.gd Error :- {error}")
     
-    # Is.gd shorten
+    # Is.gd Shortener
     try:
         s = Shortener()
         url = s.isgd.short(link)
-        shorten_urls += f"\n**Is.gd :-** {url}"
+        shorten_urls += f"\n**Is.gd :- {url}**\n"
     except Exception as error:
-        print(f"Is.gd error :- {error}")
+        print(f"Is.gd Error :- {error}")
     
-    # Osdb.link shorten
+    # Osdb.link Shortener
     try:
         s = Shortener()
         url = s.osdb.short(link)
-        shorten_urls += f"\n**Osdb.link :-** {url}"
+        shorten_urls += f"\n**Osdb.link :- {url}**\n"
     except Exception as error:
-        print(f"Osdb.link error :- {error}")
-    
-    # Ow.ly shorten
-    try:
-        s = Shortener()
-        url = s.owly.short(link)
-        shorten_urls += f"\n**Ow.ly :-** {url}"
-    except Exception as error:
-        print(f"Ow.ly error :- {error}")
-    
-    # Po.st shorten
-    try:
-        s = Shortener()
-        url = s.post.short(link)
-        shorten_urls += f"\n**Po.st :-** {url}"
-    except Exception as error:
-        print(f"Po.st error :- {error}")
-    
-    # Qps.ru shorten
-    try:
-        s = Shortener()
-        url = s.qpsru.short(link)
-        shorten_urls += f"\n**Qps.ru :-** {url}"
-    except Exception as error:
-        print(f"Qps.ru error :- {error}")
-    
-    # Short.io shorten
+        print(f"Osdb.link Error :- {error}")
+        
+    # Short.io Shortener
     if SHORTIO_API:
         try:
             s = Shortener(api_key=SHORTIO_API)
             url = s.shortio.short(link)
-            shorten_urls += f"\n**Short.io :- {url}**"
+            shorten_urls += f"\n**Short.io :- {url}**\n"
         except Exception as error:
-            print(f"Short.io error :- {error}")
+            print(f"Short.io Error :- {error}")
     
-    # TinyURL.com shorten
+    # TinyURL.com Shortener
     try:
-        s = Shortener()
+        s = Shortener(api_key=TINYURL_API)
         url = s.tinyurl.short(link)
-        shorten_urls += f"\n**TinyURL.com :-** {url}"
+        shorten_urls += f"\n**TinyURL.com :- {url}**\n"
     except Exception as error:
-        print(f"TinyURL.com error :- {error}")
+        print(f"TinyURL.com Error :- {error}")
     
-    # NullPointer shorten
+    # Droplink.co Shortener
     try:
-        s = Shortener(domain='https://0x0.st')
-        url = s.nullpointer.short(link)
-        shorten_urls += f"\n**0x0.st :-** {url}"
+        api_url = "https://droplink.co/api" 
+        params = {'api': DROPLINK_API, 'url': link}
+        async with aiohttp.ClientSession() as session:
+            async with session.get(api_url, params=params, raise_for_status=True) as response:
+                data = await response.json()
+                url = data["shortenedUrl"]
+                shorten_urls += f"\n**Droplink.co :- {url}**\n"
     except Exception as error:
-        print(f"NullPointer error :- {error}")
+        print(f"Droplink.co Error :- {error}")
+
+    # TNLink.in Shortener
+    try:
+        api_url = "https://tnlink.in/api" 
+        params = {'api': TNLINK_API, 'url': link}
+        async with aiohttp.ClientSession() as session:
+            async with session.get(api_url, params=params, raise_for_status=True) as response:
+                data = await response.json()
+                url = data["shortenedUrl"]
+                shorten_urls += f"\n**TNLink.in :- {url}**\n"
+    except Exception as error:
+        print(f"TNLink.in Error :- {error}")
     
-    # ez4short.com shorten
+    # Ez4short.com Shortener
     try:
         api_url = "https://ez4short.com/api" 
         params = {'api': EZ4SHORT_API, 'url': link}
@@ -1037,9 +1024,9 @@ async def short(link):
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**Ez4short.com :- {url}**"
+                shorten_urls += f"\n**Ez4short.com :- {url}**\n"
     except Exception as error:
-        print(f"Ez4short error :- {error}")
+        print(f"Ez4short Error :- {error}")
     
     # Send the text
     try:
