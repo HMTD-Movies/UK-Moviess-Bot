@@ -914,8 +914,6 @@ async def left(client,message):
 
 @Client.on_message(filters.private & filters.command(["translater"]))
 async def echo(client, message):
-    reply = message.reply_to_message
-    reply_id = message.reply_to_message.id if message.reply_to_message else message.id
 	keybord1= InlineKeyboardMarkup( [
         [   InlineKeyboardButton("Tamil",callback_data = "ta"),
         ],
