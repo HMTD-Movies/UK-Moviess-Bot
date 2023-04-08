@@ -5,6 +5,15 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, InlineQue
 from database.ia_filterdb import get_search_results
 from utils import is_subscribed, get_size, temp
 from info import CACHE_TIME, AUTH_USERS, AUTH_CHANNEL, CUSTOM_FILE_CAPTION
+from googletrans import Translator
+from pyrogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InlineQuery,
+    InlineQueryResultArticle,
+    InputTextMessageContent
+)
+
 
 logger = logging.getLogger(__name__)
 cache_time = 0 if AUTH_USERS or AUTH_CHANNEL else CACHE_TIME
@@ -109,5 +118,29 @@ def get_reply_markup(query):
     return InlineKeyboardMarkup(buttons)
 
 
-
+@Client.on_inline_query()
+async def inline(_, query: InlineQuery):
+        string = query.query.lower()
+        if string == "":
+        	METHOD=  [ InlineQueryResultArticle( title="How To Use", input_message_content=InputTextMessageContent("Ex ; ```@Googletranslateitbot how to use # hi```"),description="{Text} # {language code} ",thumb_url="https://tg-link.herokuapp.com/dl/0/AgADh60xG50-wFc.jpg")]
+        	await query.answer( results=METHOD,  cache_time=2, switch_pm_text="Using Method",switch_pm_parameter="start" )
+        else:
+        	splitit = string.split("#")        	     	
+        try:
+        		cd = splitit[1].lower().replace(" ", "")
+        		text = splitit[0]
+        except:
+        	METHOD=  [ InlineQueryResultArticle( title="How To Use", input_message_content=InputTextMessageContent("Ex ; ```@Googletranslateitbot how to use # hi```"),description="{Text}#{language code} ",thumb_url="https://tg-link.herokuapp.com/dl/0/AgADh60xG50-wFc.jpg")]
+        	await query.answer( results=METHOD,  cache_time=2, switch_pm_text="Using Method",switch_pm_parameter="start" )
+        	return
+        try:
+        	translator = Translator()
+        	translation = translator.translate(text,dest = cd)
+        except:
+        	return
+        TRTEXT=  [ InlineQueryResultArticle( title=f"Translated from {translation.src} To {translation.dest}", input_message_content=InputTextMessageContent(translation.text),description=f'{translation.text}',thumb_url="https://tg-link.herokuapp.com/dl/0/AgADh60xG50-wFc.jpg")]
+        try:
+        	await query.answer(results=TRTEXT ,  cache_time=2, switch_pm_text="Google Translater",switch_pm_parameter="start")
+        except:
+        	return
 
