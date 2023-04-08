@@ -46,11 +46,11 @@ async def verupikkals(bot, message):
     time_taken = datetime.timedelta(seconds=int(time.time()-start_time))
     await sts.edit(f"<b>Broadcast Completed:\nCompleted in {time_taken} seconds.\n\nTotal Users {total_users}\nCompleted: {done} / {total_users}\nSuccess: {success}\nBlocked: {blocked}\nDeleted: {deleted}</b>")
 
-@Client.on_message(filters.command("clear_junk") & filters.user(ADMINS))
+@Client.on_message(filters.command("junk_users") & filters.user(ADMINS))
 async def remove_junkuser__db(bot, message):
     users = await db.get_all_users()
     b_msg = message 
-    sts = await message.reply_text('in progress.......')   
+    sts = await message.reply_text('**Processing...**')   
     start_time = time.time()
     total_users = await db.total_users_count()
     blocked = 0
@@ -111,11 +111,11 @@ async def broadcast_group(bot, message):
         os.remove("reason.txt")
 
       
-@Client.on_message(filters.command(["junk_group", "clear_junk_group"]) & filters.user(ADMINS))
+@Client.on_message(filters.command("junk_chats") & filters.user(ADMINS))
 async def junk_clear_group(bot, message):
     groups = await db.get_all_chats()
     b_msg = message
-    sts = await message.reply_text(text='..............')
+    sts = await message.reply_text(text='**Processing...**')
     start_time = time.time()
     total_groups = await db.total_chat_count()
     done = 0
