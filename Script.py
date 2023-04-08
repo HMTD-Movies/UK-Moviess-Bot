@@ -17,7 +17,7 @@ class script(object):
 I have that Features.
 Create One Link This :-
 » I will Create For One Bot You. But Paid
-» Contact Me <a href=https://t.me/HMTD_Karthik><b>Karthik</b></a></b>"""
+» Contact Me <a href=https://t.me/TG_Karthik><b>Karthik</b></a></b>"""
     ABOUT_TXT = """<b><i>🤖 My Name :- <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a>\n
 🧑🏻‍💻 Developer :- <a href=https://t.me/TG_Karthik><b>Karthik</b></a>\n
 📝 Language :- Pyrogram\n
