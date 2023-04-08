@@ -882,11 +882,18 @@ DROPLINK_API = os.environ.get("DROPLINK_API", "1d85e33efc4969b36e0f6c0a017aaaefd
 TNLINK_API = os.environ.get("TNLINK_API", "d03a53149bf186ac74d58ff80d916f7a79ae5745")
 URLOPEN_API = os.environ.get("URLOPEN_API", "")
 
-reply_markup = InlineKeyboardMarkup(
-        [[
-        InlineKeyboardButton("Request", callback_data='https://t.me/TG_Karthik')
-        ]]
-    )
+        buttons = [
+            [
+                InlineKeyboardButton('📢 Update Channel', url='https://t.me/UK_Movies_Zone_Updates')
+            ],
+            [
+                InlineKeyboardButton('⚡ Request', url=f"https://t.me/TG_Karthik"),
+            ],
+            [
+                InlineKeyboardButton('🚫 Close', callback_data='close_data')
+            ]
+            ]
+        reply_markup = InlineKeyboardMarkup(buttons)
 
 @Client.on_message(filters.command(["short"]) & filters.regex(r'https?://[^\s]+'))
 async def reply_shortens(bot, update):
