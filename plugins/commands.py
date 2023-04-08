@@ -884,6 +884,9 @@ URLOPEN_API = os.environ.get("URLOPEN_API", "")
 
 reply_markup = InlineKeyboardMarkup(
         [[
+        InlineKeyboardButton("Request", callback_data="https://t.me/TG_Karthik")
+        ]],
+        [[
         InlineKeyboardButton("🚫 Close", callback_data='close_data')
         ]]
     )
@@ -900,7 +903,8 @@ async def reply_shortens(bot, update):
     shorten_urls = await short(link)
     await message.edit_text(
         text=shorten_urls,
-        disable_web_page_preview=True
+        disable_web_page_preview=True,
+        reply_markup=reply_markup
     )
 
 @Client.on_inline_query(filters.regex(r'https?://[^\s]+'))
