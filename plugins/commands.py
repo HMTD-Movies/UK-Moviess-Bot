@@ -1042,6 +1042,5 @@ async def short(link):
                 [[InlineKeyboardButton("Request", url="https://telegram.me/TG_Karthik")], [InlineKeyboardButton("🚫 Close", url=close_data)]]
             ),
         )
-        return shorten_urls
     except Exception as error:
         return error
