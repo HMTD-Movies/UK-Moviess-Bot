@@ -949,8 +949,10 @@ async def echo(client, message):
 		code =find(int(message.chat.id))
 	except Exception as e:
 		await message.reply_text(f" Error : {e}\nclick /start ........")
-		return 		
-	
+		return 	
+
+	if code :
+			try:
 	        if (message.reply_to_message):
 		        try:
 			        lgcd = message.text.split("/tr")
@@ -1175,6 +1177,9 @@ async def translate_text(bot,update):
       	await update.message.edit("Select language 👇",reply_markup =keybord6)
       else :
       		try:
+			lgcd = message.text.split("/translater")
+			lg_cd = lgcd[1].lower().replace(" ", "")
+			tr_text = message.reply_to_message.text
       			translator = Translator()
       			translation = translator.translate(tr_text,dest = cb_data)
       		except Exception as e:
