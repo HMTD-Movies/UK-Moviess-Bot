@@ -874,10 +874,10 @@ async def stop_button(bot, message):
     await msg.edit("**✅️ Bot 🤖 is Restarted. Now You Can Use Me 😁**")
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-BITLY_API = os.environ.get("BITLY_API", "8df1df8c23f719e5cf97788cc2d40321ea30092b")
-CUTTLY_API = os.environ.get("CUTTLY_API", "f64dffbde033b6c307387dd50b7c76e505f1c")
-SHORTCM_API = os.environ.get("SHORTCM_API", "pk_...nEQs")
-GPLINKS_API = os.environ.get("GPLINKS_API", "b0ee7d1fda4422c62f402fd0abfb89fd7e74224e")
+BITLY_API = os.environ.get("BITLY_API", "aa2132168583d283fb288625d9352f2c5835512a")
+CUTTLY_API = os.environ.get("CUTTLY_API", "bd3a3ab946d7598ee459331dac9e9568e3d66")
+SHORTIO_API = os.environ.get("SHORTIO_API", "pk_IGYL9NLmUHntt6rr")
+EZ4SHORT_API = os.environ.get("EZ4SHORT_API", "e41618d805b3c4256dfa99abde6ef11fc7629c47")
 
 reply_markup = InlineKeyboardMarkup(
         [[
@@ -888,7 +888,7 @@ reply_markup = InlineKeyboardMarkup(
 @Client.on_message(filters.command(["short"]) & filters.regex(r'https?://[^\s]+'))
 async def reply_shortens(bot, update):
     message = await update.reply_text(
-        text="`Analysing your link...`",
+        text="**Analysing Your Link...**",
         disable_web_page_preview=True,
         quote=True
     )
@@ -922,16 +922,16 @@ async def inline_short(bot, update):
 async def short(link):
     shorten_urls = "**--Shorted URLs--**\n"
     
-    # Bit.ly shorten
+    # Bitly.com Shortener
     if BITLY_API:
         try:
             s = Shortener(api_key=BITLY_API)
             url = s.bitly.short(link)
-            shorten_urls += f"\n**Bit.ly :-** {url}"
+            shorten_urls += f"\n**Bitly.com :- {url}**"
         except Exception as error:
-            print(f"Bit.ly error :- {error}")
+            print(f"Bitly.com error :- {error}")
     
-    # Chilp.it shorten
+    # Chilp.it Shortener
     try:
         s = Shortener()
         url = s.chilpit.short(link)
@@ -952,7 +952,7 @@ async def short(link):
         try:
             s = Shortener(api_key=CUTTLY_API)
             url = s.cuttly.short(link)
-            shorten_urls += f"\n**Cutt.ly :-** {url}"
+            shorten_urls += f"\n**Cutt.ly :- {url}**"
         except Exception as error:
             print(f"Cutt.ly error :- {error}")
     
@@ -1004,14 +1004,14 @@ async def short(link):
     except Exception as error:
         print(f"Qps.ru error :- {error}")
     
-    # Short.cm shorten
-    if SHORTCM_API:
+    # Short.io shorten
+    if SHORTIO_API:
         try:
-            s = Shortener(api_key=SHORTCM_API)
-            url = s.shortcm.short(link)
-            shorten_urls += f"\n**Short.cm :-** {url}"
+            s = Shortener(api_key=SHORTIO_API)
+            url = s.shortio.short(link)
+            shorten_urls += f"\n**Short.io :- {url}**"
         except Exception as error:
-            print(f"Short.cm error :- {error}")
+            print(f"Short.io error :- {error}")
     
     # TinyURL.com shorten
     try:
@@ -1029,15 +1029,15 @@ async def short(link):
     except Exception as error:
         print(f"NullPointer error :- {error}")
     
-    # GPLinks shorten
+    # ez4short.com shorten
     try:
         api_url = "https://ez4short.com/api" 
-        params = {'api': GPLINKS_API, 'url': link}
+        params = {'api': EZ4SHORT_API, 'url': link}
         async with aiohttp.ClientSession() as session:
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**ez4short.com :-** {url}"
+                shorten_urls += f"\n**Ez4short.com :- {url}**"
     except Exception as error:
         print(f"Ez4short error :- {error}")
     
