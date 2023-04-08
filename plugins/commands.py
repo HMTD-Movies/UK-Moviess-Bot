@@ -135,7 +135,7 @@ async def start(client, message):
             InlineKeyboardButton('©️ Add me to Your Group', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
             ],[
             InlineKeyboardButton('💰 Earn Money', url='https://tnlink.in/ref/KarthikUK'),
-            InlineKeyboardButton('📢 Update Channel', url='https://t.me/Star_Moviess_Tamil')
+            InlineKeyboardButton('📢 Update Channel', url='https://t.me/UK_Movies_Zone_Updates')
             ],[
             InlineKeyboardButton('😎 Help', callback_data='help'),
             InlineKeyboardButton('😁 About', callback_data='about')
@@ -288,7 +288,7 @@ async def start(client, message):
         chat_id=message.from_user.id,
         file_id=file_id,
         caption=f_caption,
-        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('🔥 Join Our Channel 🔥', url='https://t.me/Star_Moviess_Tamil') ] ] ),
+        reply_markup=InlineKeyboardMarkup( [ [ InlineKeyboardButton('🔥 Join Our Channel 🔥', url='https://t.me/UK_Movies_Zone_Updates') ] ] ),
         protect_content=True if pre == 'filep' else False,
         )
 
