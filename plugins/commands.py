@@ -9,6 +9,13 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, 
 from telegraph import upload_file
 from utils import get_file_id
 from Script import script
+import os
+import math
+import time
+import heroku3
+import requests
+from pyrogram import Client, filters, enums
+from database.users_chats_db import db
 from pyrogram import Client, filters, enums
 from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -39,6 +46,12 @@ from pyshorteners import Shortener
 from info import BOT_START_TIME, ADMINS
 from utils import humanbytes
 logger = logging.getLogger(__name__)
+
+#=====================================================
+
+HEROKU_API_KEY = (os.environ.get("HEROKU_API_KEY", "01b8b9ae-78d3-428e-88ef-f42af78b623c"))
+
+#=====================================================
 
 BATCH_FILES = {}
 
@@ -774,61 +787,92 @@ async def share_text(client, message):
         quote=True,
         reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("♂️ Share", url=f"https://telegram.me/share/url?url={quote(input_text)}")]])       
     )    
-@Client.on_message(filters.private & filters.command("status") & filters.user(ADMINS))          
-async def stats(bot, update):
-    currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - BOT_START_TIME))
-    total, used, free = shutil.disk_usage(".")
-    total = humanbytes(total)
-    used = humanbytes(used)
-    free = humanbytes(free)
-    cpu_usage = psutil.cpu_percent()
-    ram_usage = psutil.virtual_memory().percent
-    disk_usage = psutil.disk_usage('/').percent
 
-    ms_g = f"""<b><u>Bot Status</b></u>
-Uptime: <code>{currentTime}</code>
-CPU Usage: <code>{cpu_usage}%</code>
-RAM Usage: <code>{ram_usage}%</code>
-Total Disk Space: <code>{total}</code>
-Used Space: <code>{used} ({disk_usage}%)</code>
-Free Space: <code>{free}</code> """
+@Client.on_message(filters.command('status'))
+async def bot_status(client,message):
+    if HEROKU_API_KEY:
+        try:
+            server = heroku3.from_key(HEROKU_API_KEY)
 
-    msg = await bot.send_message(chat_id=update.chat.id, text="__Processing...__", parse_mode=enums.ParseMode.MARKDOWN)         
-    await msg.edit_text(text=ms_g, parse_mode=enums.ParseMode.HTML)
-    
+            user_agent = (
+                'Mozilla/5.0 (Linux; Android 10; SM-G975F) '
+                'AppleWebKit/537.36 (KHTML, like Gecko) '
+                'Chrome/80.0.3987.149 Mobile Safari/537.36'
+            )
+            accountid = server.account().id
+            headers = {
+            'User-Agent': user_agent,
+            'Authorization': f'Bearer {HEROKU_API_KEY}',
+            'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
+            }
+
+            path = "/accounts/" + accountid + "/actions/get-quota"
+
+            request = requests.get("https://api.heroku.com" + path, headers=headers)
+
+            if request.status_code == 200:
+                result = request.json()
+
+                total_quota = result['account_quota']
+                quota_used = result['quota_used']
+
+                quota_left = total_quota - quota_used
+                
+                total = math.floor(total_quota/3600)
+                used = math.floor(quota_used/3600)
+                hours = math.floor(quota_left/3600)
+                minutes = math.floor(quota_left/60 % 60)
+                days = math.floor(hours/24)
+
+                usedperc = math.floor(quota_used / total_quota * 100)
+                leftperc = math.floor(quota_left / total_quota * 100)
+
+                quota_details = f"""
+Heroku Account Status
+➪ 𝖸𝗈𝗎 𝗁𝖺𝗏𝖾 {total} 𝗁𝗈𝗎𝗋𝗌 𝗈𝖿 𝖿𝗋𝖾𝖾 𝖽𝗒𝗇𝗈 𝗊𝗎𝗈𝗍𝖺 𝖺𝗏𝖺𝗂𝗅𝖺𝖻𝗅𝖾 𝖾𝖺𝖼𝗁 𝗆𝗈𝗇𝗍𝗁.
+➪ 𝖣𝗒𝗇𝗈 𝗁𝗈𝗎𝗋𝗌 𝗎𝗌𝖾𝖽 𝗍𝗁𝗂𝗌 𝗆𝗈𝗇𝗍𝗁:
+        • {used} 𝖧𝗈𝗎𝗋𝗌 ( {usedperc}% )
+➪ 𝖣𝗒𝗇𝗈 𝗁𝗈𝗎𝗋𝗌 𝗋𝖾𝗆𝖺𝗂𝗇𝗂𝗇𝗀 𝗍𝗁𝗂𝗌 𝗆𝗈𝗇𝗍𝗁:
+        • {hours} 𝖧𝗈𝗎𝗋𝗌 ( {leftperc}% )
+        • Approximately {days} days!"""
+            else:
+                quota_details = ""
+        except:
+            print("Check your Heroku API key")
+            quota_details = ""
+    else:
+        quota_details = ""
+
+    uptime = time.strftime("%Hh %Mm %Ss", time.gmtime(time.time() - BOT_START_TIME))
+
+    try:
+        t, u, f = shutil.disk_usage(".")
+        total = humanbytes(t)
+        used = humanbytes(u)
+        free = humanbytes(f)
+
+        disk = "\n**Disk Details**\n\n" \
+            f"> USED  :  {used} / {total}\n" \
+            f"> FREE  :  {free}\n\n"
+    except:
+        disk = ""
+
+    await message.reply_text(
+        "𝗖𝘂𝗿𝗿𝗲𝗻𝘁 𝘀𝘁𝗮𝘁𝘂𝘀 𝗼𝗳 𝘆𝗼𝘂𝗿 𝗕𝗼𝘁\n\n"
+        "DB Status\n"
+        f"➪ 𝖡𝗈𝗍 𝖴𝗉𝗍𝗂𝗆𝖾: {uptime}\n"
+        f"{quota_details}"
+        f"{disk}",
+        quote=True,
+        parse_mode=enums.ParseMode.MARKDOWN
+    )
+
 @Client.on_message(filters.command("restart") & filters.user(ADMINS))
 async def stop_button(bot, message):
     msg = await bot.send_message(text="**🔄 Bot 🤖 Process is Stopped. Bot is Restarting...**", chat_id=message.chat.id)       
     await asyncio.sleep(3)
     await msg.edit("**✅️ Bot 🤖 is Restarted. Now You Can Use Me 😁**")
     os.execl(sys.executable, sys.executable, *sys.argv)
-
-@Client.on_message(filters.command("shortlink") & filters.user(ADMINS))
-async def shortlink(bot, message):
-    chat_type = message.chat.type
-    if chat_type == enums.ChatType.PRIVATE:
-        return await message.reply_text(f"<b>Hey {message.from_user.mention}, This command only works on groups !</b>")
-    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        grpid = message.chat.id
-        title = message.chat.title
-    else:
-        return
-    data = message.text
-    userid = message.from_user.id
-    user = await bot.get_chat_member(grpid, userid)
-    if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
-        return await message.reply_text("<b>You don't have access to use this command !</b>")
-    else:
-        pass
-    try:
-        command, shortlink_url, api = data.split(" ")
-    except:
-        return await message.reply_text("<b>Command Incomplete :(\n\nGive me a shortlink and api along with the command !\n\nFormat: <code>/shortlink shorturllink.in 95a8195c40d31e0c3b6baa68813fcecb1239f2e9</code></b>")
-    reply = await message.reply_text("<b>Please Wait...</b>")
-    await save_group_settings(grpid, 'shortlink', shortlink_url)
-    await save_group_settings(grpid, 'shortlink_api', api)
-    await save_group_settings(grpid, 'is_shortlink', True)
-    await reply.edit_text(f"<b>Successfully added shortlink API for {title}.\n\nCurrent Shortlink Website: <code>{shortlink_url}</code>\nCurrent API: <code>{api}</code></b>")
 
 BITLY_API = os.environ.get("BITLY_API", "8df1df8c23f719e5cf97788cc2d40321ea30092b")
 CUTTLY_API = os.environ.get("CUTTLY_API", "f64dffbde033b6c307387dd50b7c76e505f1c")
