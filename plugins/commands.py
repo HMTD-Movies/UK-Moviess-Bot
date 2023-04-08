@@ -885,14 +885,10 @@ async def stickerid(bot, message):
     else: 
        await message.reply("<b>Oops !! Not a sticker file</b>")
 
-@Client.on_message(filters.user(ADMINS) & filters.command(["find"]))
-async def findmenb(bot, message):
-		id = message.text.split("/find")
-		user_id = id[1].replace(" ", "")
-		await message.reply_text(find_one(int(user_id)))
-            
 @Client.on_message(filters.private & filters.command(["translater"]))
 async def echo(client, message):
+    reply = message.reply_to_message
+    reply_id = message.reply_to_message.id if message.reply_to_message else message.id
 	keybord1= InlineKeyboardMarkup( [
         [   InlineKeyboardButton("Tamil",callback_data = "ta"),
         ],
@@ -952,8 +948,9 @@ async def echo(client, message):
 @Client.on_callback_query()
 async def translate_text(bot,update):
       keybord1= InlineKeyboardMarkup( [
-        [ 
-            InlineKeyboardButton("Afrikaans", callback_data='af'),
+        [   InlineKeyboardButton("Tamil",callback_data = "ta"),
+        ], 
+        [    InlineKeyboardButton("Afrikaans", callback_data='af'),
              InlineKeyboardButton("Albanian", callback_data='sq'),
             InlineKeyboardButton("Amharic",callback_data ='am'),
         ],
@@ -1168,7 +1165,7 @@ async def translate_text(bot,update):
 @Client.on_message(filters.private &filters.command(['unset']))
 async def unsetlg(client,message):
 	unset(int(message.chat.id))
-	await message.reply_text("Successfully removed custom default language")
+	await message.reply_text("**Successfully removed custom default language**")
 
 @Client.on_message(filters.private &filters.command(['set']))
 async def setlg(client,message):
