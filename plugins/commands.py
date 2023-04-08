@@ -874,6 +874,13 @@ async def stop_button(bot, message):
     await msg.edit("**✅️ Bot 🤖 is Restarted. Now You Can Use Me 😁**")
     os.execl(sys.executable, sys.executable, *sys.argv)
 
+@Client.on_message(filters.command(["stickerid"]))
+async def stickerid(bot, message):   
+    if message.reply_to_message.sticker:
+       await message.reply(f"**Sticker ID is**\n`{message.reply_to_message.sticker.file_id}`\n\n**Unique ID is **\n\n`{message.reply_to_message.sticker.file_unique_id}`", quote=True)
+    else: 
+       await message.reply("<b>Oops !! Not a sticker file</b>")
+
 BITLY_API = os.environ.get("BITLY_API", "aa2132168583d283fb288625d9352f2c5835512a")
 CUTTLY_API = os.environ.get("CUTTLY_API", "bd3a3ab946d7598ee459331dac9e9568e3d66")
 EZ4SHORT_API = os.environ.get("EZ4SHORT_API", "e41618d805b3c4256dfa99abde6ef11fc7629c47")
