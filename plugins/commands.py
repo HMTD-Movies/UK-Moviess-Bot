@@ -15,8 +15,7 @@ import math
 import time
 import heroku3
 import requests
-from helper.database import set,unset ,insert
-
+from database.gtrans_mdb import set,unset ,insert
 from pyrogram import Client, filters, enums
 from database.users_chats_db import db
 from pyrogram import Client, filters, enums
