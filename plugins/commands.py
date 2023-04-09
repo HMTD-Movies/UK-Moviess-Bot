@@ -8,7 +8,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
 from telegraph import upload_file
-from database.gtrans_mdb import find, insert, find_one
+from database.gtrans_mdb import find, find_one
 from utils import get_file_id
 from Script import script
 import os
@@ -16,7 +16,7 @@ import math
 import time
 import heroku3
 import requests
-from database.gtrans_mdb import set,unset ,insert
+from database.gtrans_mdb import set, unset, insert
 from pyrogram import Client, filters, enums
 from database.users_chats_db import db
 from pyrogram import Client, filters, enums
