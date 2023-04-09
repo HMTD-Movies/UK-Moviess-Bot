@@ -892,9 +892,6 @@ async def echo(client, message):
         reply_markup =keybord1,
         quote = True
     )
-
-@Client.on_message(filters.private & filters.command(["translater"]))
-async def echo(client, message):
 	keybord1= InlineKeyboardMarkup( [
         [   InlineKeyboardButton("Tamil",callback_data = "ta"),
         ],
