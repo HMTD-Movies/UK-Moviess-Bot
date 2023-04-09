@@ -885,44 +885,13 @@ async def stickerid(bot, message):
     else: 
        await message.reply("<b>Oops !! Not a sticker file</b>")
 
-@Client.on_message(filters.command(["tr"]))
-async def left(client,message):
-	if (message.reply_to_message):
-		try:
-			lgcd = message.text.split("/tr")
-			lg_cd = lgcd[1].lower().replace(" ", "")
-			tr_text = message.reply_to_message.caption
-			translator = Translator()
-			translation = translator.translate(tr_text,dest = lg_cd)
-			hehek = InlineKeyboardMarkup(
-                                [
-                                    [
-                                        InlineKeyboardButton(
-                                            text=f"𝘔𝘰𝘳𝘦 𝘓𝘢𝘯𝘨 𝘊𝘰𝘥𝘦𝘴", url="https://cloud.google.com/translate/docs/languages"
-                                        )
-                                    ],
-				    [
-                                        InlineKeyboardButton(
-                                            "𝘊𝘭𝘰𝘴𝘦", callback_data="close_data"
-                                        )
-                                    ],
-                                ]
-                            )
-			try:
-				for i in list:
-					if list[i]==translation.src:
-						fromt = i
-					if list[i] == translation.dest:
-						to = i 
-				await message.reply_text(f"translated from {fromt.capitalize()} to {to.capitalize()}\n\n```{translation.text}```", reply_markup=hehek, quote=True)
-			except:
-			   	await message.reply_text(f"Translated from **{translation.src}** To **{translation.dest}**\n\n```{translation.text}```", reply_markup=hehek, quote=True)
-			
-
-		except :
-			print("error")
-	else:
-			 ms = await message.reply_text("**You can Use This Command by using Reply to Message**")
+@Client.on_message(filters.command("tr"))
+async def echo(client, message): 
+    await message.reply_text(
+        Script.TRANSLATED_MSG,
+        reply_markup =keybord1,
+        quote = True
+    )
 
 @Client.on_message(filters.private & filters.command(["translater"]))
 async def echo(client, message):
@@ -961,8 +930,8 @@ async def echo(client, message):
 		code =find(int(message.chat.id))
 	except Exception as e:
 		await message.reply_text(f" Error : {e}\nclick /start ........")
-		return 	
-
+		return 
+		
 	if code :
 			try:
 				translator = Translator()
@@ -976,11 +945,11 @@ async def echo(client, message):
 							fromt = i
 						if list[i] == translation.dest:
 							to = i
-					await message.reply_text(f"Translated from **{fromt.capitalize()}** To **{to.capitalize()}**\n\n```{translation.text}```\n\n join @lntechnical")
+					await message.reply_text(f"Translated from **{fromt.capitalize()}** To **{to.capitalize()}**\n\n```{translation.text}```\n\n Join @HMTD_Links")
 			except Exception as e:
-					await message.reply_text(f"Translated from **{translation.src}** To **{translation.dest}**\n\n```{translation.text}```\n\n join @lntechnical")
-        else:
-		await message.reply_text("Select language 👇",reply_to_message_id = message.id, reply_markup =keybord1)
+					await message.reply_text(f"Translated from **{translation.src}** To **{translation.dest}**\n\n```{translation.text}```\n\n Join @HMTD_Links")
+	else:
+		await  message.reply_text("Select language 👇",reply_to_message_id = message.id, reply_markup =keybord1)
 
 @Client.on_callback_query()
 async def translate_text(bot,update):
