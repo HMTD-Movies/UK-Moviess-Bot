@@ -885,7 +885,7 @@ async def stickerid(bot, message):
     else: 
        await message.reply("<b>Oops !! Not a sticker file</b>")
 
-@Client.on_message(filters.command("tr"))
+@Client.on_message(filters.private & filters.command(["try"]))
 async def echo(client, message): 
     await message.reply_text(
         script.TRANSLATED_MSG,
