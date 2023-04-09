@@ -139,3 +139,5 @@ New Features ✨
 TRANSLATED_MSG = """<b>Choose The Language From Here That I Want to Translate.👇</b>"""
 
 REQ_TO_ADMIN = """<b>😒 Currently Unavailable to My Database or Not Released This Movie 🎥 ! We are Really Sorry for Inconvenience..!\n Have Patience..! Our Greatest 👨🏻‍✈️ Admins Will Upload This Movie 🎥 As Soon as Possible.!\n\nRequest to Our Greatest 👨🏻‍✈️ Admins</b>"""
+
+CREDITS = """**Credits Here**"""
