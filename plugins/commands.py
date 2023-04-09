@@ -979,8 +979,16 @@ async def echo(client, message):
 					await message.reply_text(f"Translated from **{fromt.capitalize()}** To **{to.capitalize()}**\n\n```{translation.text}```\n\n join @lntechnical")
 			except Exception as e:
 					await message.reply_text(f"Translated from **{translation.src}** To **{translation.dest}**\n\n```{translation.text}```\n\n join @lntechnical")
-	else:
-		await  message.reply_text("Select language 👇",reply_to_message_id = message.id, reply_markup =keybord1)
+        reply = message.reply_to_message
+        reply_id = message.reply_to_message.id if message.reply_to_message else message.id
+        input_split = message.text.split(None, 1)
+        if len(input_split) == 2:
+            input_text = input_split[1]
+        elif reply and (reply.text or reply.caption):
+            input_text = reply.text or reply.caption
+        else:
+                await message.reply_text(
+		await message.reply_text("Select language 👇",reply_to_message_id = message.id, reply_markup =keybord1)
 
 @Client.on_callback_query()
 async def translate_text(bot,update):
