@@ -888,7 +888,7 @@ async def stickerid(bot, message):
 @Client.on_message(filters.command("tr"))
 async def echo(client, message): 
     await message.reply_text(
-        Script.TRANSLATED_MSG,
+        script.TRANSLATED_MSG,
         reply_markup =keybord1,
         quote = True
     )
