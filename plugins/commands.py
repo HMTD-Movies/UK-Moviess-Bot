@@ -889,7 +889,7 @@ async def stickerid(bot, message):
 async def echo(client, message): 
     await message.reply_text(
         script.TRANSLATED_MSG,
-        reply_markup =keybord1,
+        reply_markup = GROUP_LANGUAGE,
         quote = True
     )
 
