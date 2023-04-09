@@ -987,7 +987,6 @@ async def echo(client, message):
         elif reply and (reply.text or reply.caption):
             input_text = reply.text or reply.caption
         else:
-                await message.reply_text(
 		await message.reply_text("Select language 👇",reply_to_message_id = message.id, reply_markup =keybord1)
 
 @Client.on_callback_query()
