@@ -11,6 +11,10 @@ from telegraph import upload_file
 from database.gtrans_mdb import find, find_one
 from utils import get_file_id
 from Script import script
+from pyrogram import filters
+from pyrogram import Client
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from plugins.language import BOT_LANGUAGE, GROUP_LANGUAGE
 import os
 import math
 import time
