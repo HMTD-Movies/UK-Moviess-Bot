@@ -593,8 +593,6 @@ async def settings(client, message):
             reply_to_message_id=message.id
         )
 
-
-
 @Client.on_message(filters.command('set_template'))
 async def save_template(client, message):
     sts = await message.reply("<b>Checking New Template</b>")
@@ -637,6 +635,84 @@ async def save_template(client, message):
     template = message.text.split(" ", 1)[1]
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"<b>Successfully Upgraded Your Template For {title} to\n\n{template}</b>")
+
+@Client.on_message((filters.command(["request", "Request"]) | filters.regex("#request") | filters.regex("#Request")) & filters.group)
+async def requests(bot, message):
+    if REQST_CHANNEL is None or SUPPORT_CHAT_ID is None: return # Must add REQST_CHANNEL and SUPPORT_CHAT_ID to use this feature
+    if message.reply_to_message and SUPPORT_CHAT_ID == message.chat.id:
+        chat_id = message.chat.id
+        reporter = str(message.from_user.id)
+        mention = message.from_user.mention
+        success = True
+        content = message.reply_to_message.text
+        try:
+            if REQST_CHANNEL is not None:
+                btn = [[
+                        InlineKeyboardButton('📥 𝖵𝗂𝖾𝗐 𝖱𝖾𝗊𝗎𝖾𝗌𝗍 📥', url=f"{message.reply_to_message.link}"),
+                        InlineKeyboardButton('📝 𝖲𝗁𝗈𝗐 𝖮𝗉𝗍𝗂𝗈𝗇𝗌 📝', callback_data=f'show_option#{reporter}')
+                      ]]
+                reported_post = await bot.send_message(chat_id=REQST_CHANNEL, text=f"<b>𝖱𝖾𝗉𝗈𝗋𝗍𝖾𝗋 : {mention} ({reporter})\n\n𝖬𝖾𝗌𝗌𝖺𝗀𝖾 : {content}</b>", reply_markup=InlineKeyboardMarkup(btn))
+                success = True
+            elif len(content) >= 3:
+                for admin in ADMINS:
+                    btn = [[
+                        InlineKeyboardButton('📥 𝖵𝗂𝖾𝗐 𝖱𝖾𝗊𝗎𝖾𝗌𝗍 📥', url=f"{message.reply_to_message.link}"),
+                        InlineKeyboardButton('📝 𝖲𝗁𝗈𝗐 𝖮𝗉𝗍𝗂𝗈𝗇𝗌 📝', callback_data=f'show_option#{reporter}')
+                      ]]
+                    reported_post = await bot.send_message(chat_id=admin, text=f"<b>𝖱𝖾𝗉𝗈𝗋𝗍𝖾𝗋 : {mention} ({reporter})\n\n𝖬𝖾𝗌𝗌𝖺𝗀𝖾 : {content}</b>", reply_markup=InlineKeyboardMarkup(btn))
+                    success = True
+            else:
+                if len(content) < 3:
+                    await message.reply_text("<b>You must type about your request [Minimum 3 Characters]. Requests can't be empty.</b>")
+            if len(content) < 3:
+                success = False
+        except Exception as e:
+            await message.reply_text(f"Error: {e}")
+            pass
+        
+    elif SUPPORT_CHAT_ID == message.chat.id:
+        chat_id = message.chat.id
+        reporter = str(message.from_user.id)
+        mention = message.from_user.mention
+        success = True
+        content = message.text
+        keywords = ["#request", "/request", "#Request", "/Request"]
+        for keyword in keywords:
+            if keyword in content:
+                content = content.replace(keyword, "")
+        try:
+            if REQST_CHANNEL is not None and len(content) >= 3:
+                btn = [[
+                        InlineKeyboardButton('📥 𝖵𝗂𝖾𝗐 𝖱𝖾𝗊𝗎𝖾𝗌𝗍 📥', url=f"{message.link}"),
+                        InlineKeyboardButton('📝 𝖲𝗁𝗈𝗐 𝖮𝗉𝗍𝗂𝗈𝗇𝗌 📝', callback_data=f'show_option#{reporter}')
+                      ]]
+                reported_post = await bot.send_message(chat_id=REQST_CHANNEL, text=f"<b>𝖱𝖾𝗉𝗈𝗋𝗍𝖾𝗋 : {mention} ({reporter})\n\n𝖬𝖾𝗌𝗌𝖺𝗀𝖾 : {content}</b>", reply_markup=InlineKeyboardMarkup(btn))
+                success = True
+            elif len(content) >= 3:
+                for admin in ADMINS:
+                    btn = [[
+                        InlineKeyboardButton('📥 𝖵𝗂𝖾𝗐 𝖱𝖾𝗊𝗎𝖾𝗌𝗍 📥', url=f"{message.link}"),
+                        InlineKeyboardButton('📝 𝖲𝗁𝗈𝗐 𝖮𝗉𝗍𝗂𝗈𝗇𝗌 📝', callback_data=f'show_option#{reporter}')
+                      ]]
+                    reported_post = await bot.send_message(chat_id=admin, text=f"<b>𝖱𝖾𝗉𝗈𝗋𝗍𝖾𝗋 : {mention} ({reporter})\n\n𝖬𝖾𝗌𝗌𝖺𝗀𝖾 : {content}</b>", reply_markup=InlineKeyboardMarkup(btn))
+                    success = True
+            else:
+                if len(content) < 3:
+                    await message.reply_text("<b>You must type about your request [Minimum 3 Characters]. Requests can't be empty.</b>")
+            if len(content) < 3:
+                success = False
+        except Exception as e:
+            await message.reply_text(f"Error: {e}")
+            pass
+
+    else:
+        success = False
+    
+    if success:
+        btn = [[
+                InlineKeyboardButton('📥 𝖵𝗂𝖾𝗐 𝖱𝖾𝗊𝗎𝖾𝗌𝗍 📥', url=f"{reported_post.link}")
+              ]]
+        await message.reply_text("<b>Your request has been added! Please wait for some time.</b>", reply_markup=InlineKeyboardMarkup(btn))
 
 @Client.on_message(filters.command("send") & filters.user(ADMINS))
 async def send_msg(bot, message):
@@ -717,6 +793,32 @@ async def send_msg(bot, message):
             await message.reply_text(f"<b>Error: {e}</b>")
     else:
         await message.reply_text("<b>Use this command as a reply to any message using the target chat id. For eg: /send userid</b>")
+
+@Client.on_message(filters.command("group_send") & filters.user(ADMINS))
+async def send_chatmsg(bot, message):
+    if message.reply_to_message:
+        target_id = message.text.split(" ", 1)[1]
+        out = "Chats Saved In DB Are:\n\n"
+        success = False
+        try:
+            chat = await bot.get_chat(target_id)
+            chats = await db.get_all_chats()
+            async for cht in chats:
+                out += f"{cht['id']}"
+                out += '\n'
+            if str(chat.id) in str(out):
+                await message.reply_to_message.copy(int(chat.id))
+                success = True
+            else:
+                success = False
+            if success:
+                await message.reply_text(f"<b>Your message has been successfully send to <code>{chat.id}</code>.</b>")
+            else:
+                await message.reply_text("<b>An Error Occured !</b>")
+        except Exception as e:
+            await message.reply_text(f"<b>Error :- <code>{e}</code></b>")
+    else:
+        await message.reply_text("<b>Error𝖢𝗈𝗆𝗆𝖺𝗇𝖽 𝖨𝗇𝖼𝗈𝗆𝗉𝗅𝖾𝗍𝖾 !</b>")
 
 @Client.on_message(filters.command("deletefiles") & filters.user(ADMINS))
 async def deletemultiplefiles(bot, message):
@@ -1263,7 +1365,7 @@ async def short(link):
         try:
             s = Shortener(api_key=BITLY_API)
             url = s.bitly.short(link)
-            shorten_urls += f"\n**1) Bit.ly :- {url}**\n"
+            shorten_urls += f"\n**Bit.ly :- {url}**\n"
         except Exception as error:
             print(f"Bit.ly Error :- {error}")
         
@@ -1271,7 +1373,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.clckru.short(link)
-        shorten_urls += f"\n**2) Clck.ru :- {url}**\n"
+        shorten_urls += f"\n**Clck.ru :- {url}**\n"
     except Exception as error:
         print(f"Click.ru Error :- {error}")
     
@@ -1280,7 +1382,7 @@ async def short(link):
         try:
             s = Shortener(api_key=CUTTLY_API)
             url = s.cuttly.short(link)
-            shorten_urls += f"\n**3) Cutt.ly :- {url}**\n"
+            shorten_urls += f"\n**Cutt.ly :- {url}**\n"
         except Exception as error:
             print(f"Cutt.ly Error :- {error}")
     
@@ -1288,7 +1390,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.dagd.short(link)
-        shorten_urls += f"\n**4) Da.gd :- {url}**\n"
+        shorten_urls += f"\n**Da.gd :- {url}**\n"
     except Exception as error:
         print(f"Da.gd Error :- {error}")
     
@@ -1296,7 +1398,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.isgd.short(link)
-        shorten_urls += f"\n**5) Is.gd :- {url}**\n"
+        shorten_urls += f"\n**Is.gd :- {url}**\n"
     except Exception as error:
         print(f"Is.gd Error :- {error}")
     
@@ -1304,7 +1406,7 @@ async def short(link):
     try:
         s = Shortener()
         url = s.osdb.short(link)
-        shorten_urls += f"\n**6) Osdb.link :- {url}**\n"
+        shorten_urls += f"\n**Osdb.link :- {url}**\n"
     except Exception as error:
         print(f"Osdb.link Error :- {error}")
                 
@@ -1316,7 +1418,7 @@ async def short(link):
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**7) Droplink.co :- {url}**\n"
+                shorten_urls += f"\n**DropLink.co :- {url}**\n"
     except Exception as error:
         print(f"Droplink.co Error :- {error}")
 
@@ -1328,7 +1430,7 @@ async def short(link):
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**8) TNLink.in :- {url}**\n"
+                shorten_urls += f"\n**TNLink.in :- {url}**\n"
     except Exception as error:
         print(f"TNLink.in Error :- {error}")
 
@@ -1336,7 +1438,7 @@ async def short(link):
     try:
         s = Shortener(api_key=TINYURL_API)
         url = s.tinyurl.short(link)
-        shorten_urls += f"\n**9) TinyURL.com :- {url}**\n"
+        shorten_urls += f"\n**TinyURL.com :- {url}**\n"
     except Exception as error:
         print(f"TinyURL.com Error :- {error}")
     
@@ -1348,7 +1450,7 @@ async def short(link):
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**10) Ez4short.com :- {url}**\n"
+                shorten_urls += f"\n**Ez4short.com :- {url}**\n"
     except Exception as error:
         print(f"Ez4short.com Error :- {error}")
 
@@ -1360,7 +1462,7 @@ async def short(link):
             async with session.get(api_url, params=params, raise_for_status=True) as response:
                 data = await response.json()
                 url = data["shortenedUrl"]
-                shorten_urls += f"\n**11) Shareus.io :- {url}**\n"
+                shorten_urls += f"\n**Shareus.io :- {url}**\n"
     except Exception as error:
         print(f"Shareus.io Error :- {error}")
     
