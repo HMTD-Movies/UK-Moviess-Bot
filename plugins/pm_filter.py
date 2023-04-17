@@ -407,13 +407,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 await query.answer(url=f"https://telegram.dog/{temp.U_NAME}?start={ident}_{file_id}")
                 return
             else:
-                await client.send_cached_media(
+                feck=await client.send_cached_media(
                     chat_id=query.from_user.id,
                     file_id=file_id,
-                    caption=f_caption,
+                    caption=f_caption+f"\n𝗧𝗵𝗶𝘀 𝗳𝗶𝗹𝗲 𝘄𝗶𝗹𝗹 𝗯𝗲 𝗱𝗲𝗹𝗲𝘁𝗲𝗱 𝗶𝗻 {round(DELETE_TIMER/60)} 𝗺𝗶𝗻𝘂𝘁𝗲𝘀. 𝗦𝗼 𝗙𝗼𝘄𝗮𝗿𝗱 𝘁𝗼 𝘆𝗼𝘂𝗿 𝘀𝗮𝘃𝗲𝗱 𝗺𝗲𝘀𝘀𝗮𝗴𝗲𝘀.",
                     protect_content=True if ident == "filep" else False 
                 )
                 await query.answer('Check PM, I have Sent Files 📂 in PM', show_alert=True)
+                await asyncio.sleep(DELETE_TIMER)
+                await feck.delete()
         except UserIsBlocked:
             await query.answer('You Are Blocked to Use Me !', show_alert=True)
         except PeerIdInvalid:
@@ -446,9 +448,11 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await client.send_cached_media(
             chat_id=query.from_user.id,
             file_id=file_id,
-            caption=f_caption,
+            caption=f_caption+f"\n𝗧𝗵𝗶𝘀 𝗳𝗶𝗹𝗲 𝘄𝗶𝗹𝗹 𝗯𝗲 𝗱𝗲𝗹𝗲𝘁𝗲𝗱 𝗶𝗻 {round(DELETE_TIMER/60)} 𝗺𝗶𝗻𝘂𝘁𝗲𝘀. 𝗦𝗼 𝗙𝗼𝘄𝗮𝗿𝗱 𝘁𝗼 𝘆𝗼𝘂𝗿 𝘀𝗮𝘃𝗲𝗱 𝗺𝗲𝘀𝘀𝗮𝗴𝗲𝘀.",
             protect_content=True if ident == 'checksubp' else False
         )
+        await asyncio.sleep(DELETE_TIMER)
+        await feck.delete()
     elif query.data == "pages":
         await query.answer()
     elif query.data == "start":
