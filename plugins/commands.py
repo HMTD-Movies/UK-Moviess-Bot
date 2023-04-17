@@ -584,6 +584,37 @@ async def settings(client, message):
                 ),
             ],
         ]
+            [
+                InlineKeyboardButton(
+                    'Auto Delete 🗑️',
+                    callback_data=f'setgs#auto_delete#{settings["auto_delete"]}#{grp_id}',
+                ),
+                InlineKeyboardButton(
+                    '5 Min' if settings["auto_delete"] else '❌ No',
+                    callback_data=f'setgs#auto_delete#{settings["auto_delete"]}#{grp_id}',
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    'Auto Filter',
+                    callback_data=f'setgs#auto_ffilter#{settings["auto_ffilter"]}#{grp_id}',
+                ),
+                InlineKeyboardButton(
+                    '✅ Yes' if settings["auto_ffilter"] else '❌ No',
+                    callback_data=f'setgs#auto_ffilter#{settings["auto_ffilter"]}#{grp_id}',
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    'Max Buttons',
+                    callback_data=f'setgs#max_btn#{settings["max_btn"]}#{grp_id}',
+                ),
+                InlineKeyboardButton(
+                    '10' if settings["max_btn"] else f'{MAX_B_TN}',
+                    callback_data=f'setgs#max_btn#{settings["max_btn"]}#{grp_id}',
+                ),
+            ],
+        ]
 
         reply_markup = InlineKeyboardMarkup(buttons)
 
