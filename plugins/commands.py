@@ -630,7 +630,7 @@ async def settings(client, message):
                 reply_to_message_id=message.id
             )
         else:
-        await message.reply_text(
+            await message.reply_text(
             text=f"<b>Change The Bot Settings For {title}..⚙</b>",
             reply_markup=reply_markup,
             disable_web_page_preview=True,
