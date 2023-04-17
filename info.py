@@ -84,6 +84,7 @@ CAPTION_BUTTON = "🔥 Join Our Channel 🔥"
 CAPTION_BUTTON_URL = "https://t.me/UK_Movies_Zone_Updates"
 
    # Auto Delete For Bot Sending Files #
+FILE_DELETE_TIMER = int(os.environ.get('FILE_DELETE_TIMER', '20'))
 
 LOG_STR = "Current Cusomized Configurations are:-\n"
 LOG_STR += ("IMDB Results are Enabled, Bot will be showing imdb details for you queries.\n" if IMDB else "IMBD Results are disabled.\n")
