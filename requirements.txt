@@ -1,4 +1,5 @@
 git+https://github.com/Joelkb/cinemagoer
+git+https://github.com/itz-jeol/pyrogram
 pyrogram>=2.0.30
 imdbpy==2022.7.9
 tgcrypto
@@ -22,6 +23,10 @@ speedtest==0.0.1
 humanize==4.6.0
 psutil==5.9.4
 pyshorteners
-gTTS
+gTTS==2.3.1
 googletrans==3.1.0a0
 aiofiles
+telethon
+youtube-search
+youtube-search-python
+yt-dlp==2023.2.17
