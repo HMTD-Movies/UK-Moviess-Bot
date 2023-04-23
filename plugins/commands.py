@@ -698,7 +698,7 @@ async def save_template(client, message):
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"<b>Successfully Upgraded Your Template For {title} to\n\n{template}</b>")
 
-@Client.on_message((filters.command("request") | filters.regex("#request") | filters.regex("#Request")) & filters.group)
+@Client.on_message((filters.private & filters.command("request"))
 async def requests(bot, message):
     if REQST_CHANNEL is None or SUPPORT_CHAT_ID is None: return # Must add REQST_CHANNEL and SUPPORT_CHAT_ID to use this feature
     if message.reply_to_message and SUPPORT_CHAT_ID == message.chat.id:
