@@ -80,6 +80,7 @@ from telethon.errors import (
     SessionPasswordNeededError,
     PasswordHashInvalidError
 )
+from __future__ import unicode_literals
 import os, requests, asyncio, math, time, wget
 from pyrogram import filters, Client
 from pyrogram.types import Message
