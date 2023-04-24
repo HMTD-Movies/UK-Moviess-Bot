@@ -121,7 +121,8 @@ async def next_page(bot, query):
             btn.insert(0, 
             [
                 InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 𝖳𝗂𝗉𝗌', 'info')
+                InlineKeyboardButton(f'📝 Tips', 'info'),
+                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
             ]
             )
 
@@ -129,7 +130,8 @@ async def next_page(bot, query):
             btn.insert(0, 
             [
                 InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 𝖳𝗂𝗉𝗌', 'info')
+                InlineKeyboardButton(f'📝 Tips', 'info'),
+                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
             ]
             )
                 
@@ -141,7 +143,8 @@ async def next_page(bot, query):
             btn.insert(0, 
             [
                 InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 𝖳𝗂𝗉𝗌', 'info')
+                InlineKeyboardButton(f'📝 Tips', 'info'),
+                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
             ]
             )
 
@@ -149,7 +152,8 @@ async def next_page(bot, query):
             btn.insert(0, 
             [
                 InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 𝖳𝗂𝗉𝗌', 'info')
+                InlineKeyboardButton(f'📝 Tips', 'info'),
+                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
             ]
             )
     try:
@@ -1112,6 +1116,46 @@ async def auto_filter(client, msg, spoll=False):
             InlineKeyboardButton(text="⚡ How to Download ⚡", url='https://t.me/UK_Movies_Zone_Updates')
         ]
     )
+    try:
+        if settings['auto_delete']:
+            btn.insert(0, 
+            [
+                InlineKeyboardButton(f'😇 Info', 'tips'),
+                InlineKeyboardButton(f'📝 Tips', 'info'),
+                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
+            ]
+            )
+
+        else:
+            btn.insert(0, 
+            [
+                InlineKeyboardButton(f'😇 Info', 'tips'),
+                InlineKeyboardButton(f'📝 Tips', 'info'),
+                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
+            ]
+            )
+                
+    except KeyError:
+        grpid = await active_connection(str(message.from_user.id))
+        await save_group_settings(grpid, 'auto_delete', True)
+        settings = await get_settings(message.chat.id)
+        if settings['auto_delete']:
+            btn.insert(0, 
+            [
+                InlineKeyboardButton(f'😇 Info', 'tips'),
+                InlineKeyboardButton(f'📝 Tips', 'info'),
+                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
+            ]
+            )
+
+        else:
+            btn.insert(0, 
+            [
+                InlineKeyboardButton(f'😇 Info', 'tips'),
+                InlineKeyboardButton(f'📝 Tips', 'info'),
+                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
+            ]
+            )
 
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
