@@ -55,13 +55,12 @@ IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", "<b>🎥 Movie :- <a href={url}>{ti
 LONG_IMDB_DESCRIPTION = is_enabled(environ.get("LONG_IMDB_DESCRIPTION", "True"), True)
 SPELL_CHECK_REPLY = is_enabled(environ.get("SPELL_CHECK_REPLY", "True"), True)
 MAX_LIST_ELM = environ.get("MAX_LIST_ELM", None)
-MAX_B_TN = environ.get("MAX_B_TN", "10")
+MAX_B_TN = environ.get("MAX_B_TN", "8")
 INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', '-1001797626445'))
 FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).split()]
 MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), True)
 PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "False")), True)
-
 
 ## Extra Features ##
     
@@ -85,7 +84,7 @@ CAPTION_BUTTON = "🔥 Join Our Channel 🔥"
 CAPTION_BUTTON_URL = "https://t.me/UK_Movies_Zone_Updates"
 
    # Auto Delete For Bot Sending Files #
-FILE_DELETE_TIMER = int(environ.get('FILE_DELETE_TIMER', '86400'))
+FILE_DELETE_TIMER = int(environ.get('FILE_DELETE_TIMER', '60'))
 
 LOG_STR = "Current Cusomized Configurations are:-\n"
 LOG_STR += ("IMDB Results are Enabled, Bot will be showing imdb details for you queries.\n" if IMDB else "IMBD Results are disabled.\n")
