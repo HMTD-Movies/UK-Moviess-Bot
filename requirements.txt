@@ -29,3 +29,5 @@ telethon
 youtube-search
 youtube-search-python
 yt-dlp==2023.2.17
+wget
+pytz
