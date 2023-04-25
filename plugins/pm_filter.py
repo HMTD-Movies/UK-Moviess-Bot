@@ -1016,8 +1016,6 @@ async def auto_filter(client, msg, spoll=False):
             search = message.text
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
-                await client.send_message(req_channel,f"<b>#Requested_Movie 👇🏻\n\n➟ 🎥 Movie Name :- {search}\n➟ 💁🏻 Requested By :- {message.from_user.first_name}\n➟ 🆔 User ID :- <code>{message.from_user.id}</code>\n➟ 👨🏻‍✈️ User Link :- {message.from_user.mention}</b>", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("✅ This Movie has Been Uploaded", callback_data="close_data")]]))
-                await message.reply_text(text=f"<b>Hello 👋🏻 {message.from_user.mention} ❤️,\n\nYour Request Has Been Sent to Our Admin's Dashboard.!\nPlease Keep Some Patience..!\nThey Will Upload This Movie 🎥 as Soon as Possible\n\n➟ 🎥 Movie Name : {search}\n➟ 💁🏻 Requested By : {message.from_user.first_name}\n➟ 🤵🏻 User Link :- {message.from_user.mention}\n\n🎥 Get More Movies/Series Files 📂 in <a href=https://t.me/UK_Movies_Bot><b>UK Movies Bot</b></a>\n\n👨🏻‍✈️ Admin Support :-</b> <a href=https://t.me/HMTD_Karthik><b>Karthik</b></a>", disable_web_page_preview=True, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("©️ Add me to Your Group", url=f'http://t.me/{temp.U_NAME}?startgroup=true')],[InlineKeyboardButton("📢 Update Channel", url="https://t.me/UK_Movies_Zone_Updates"), InlineKeyboardButton("👥 Support Group", url="https://t.me/HMTD_Discussion_Group")],[InlineKeyboardButton("Thank You ❤️ UK Movies Bot", callback_data="close_data")]]))
                 if settings["spell_check"]:
                     return await advantage_spell_chok(msg)
                 else:
@@ -1034,7 +1032,7 @@ async def auto_filter(client, msg, spoll=False):
             [
                 InlineKeyboardButton(
                     text=f"[{get_size(file.file_size)}] {file.file_name}", 
-                    url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
+                    url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
             ]
             for file in files
@@ -1044,11 +1042,11 @@ async def auto_filter(client, msg, spoll=False):
             [
                 InlineKeyboardButton(
                     text=f"[{get_size(file.file_size)}] {file.file_name}", 
-                    url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
+                    url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
                 InlineKeyboardButton(
                     text=f"[{get_size(file.file_size)}] {file.file_name}", 
-                    url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
+                    url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
             ]
             for file in files
@@ -1059,46 +1057,6 @@ async def auto_filter(client, msg, spoll=False):
             InlineKeyboardButton(text="⚡ How to Download ⚡", url='https://t.me/UK_Movies_Zone_Updates')
         ]
     )
-    try:
-        if settings['auto_delete']:
-            btn.insert(0, 
-            [
-                InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 Tips', 'info'),
-                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
-            ]
-            )
-
-        else:
-            btn.insert(0, 
-            [
-                InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 Tips', 'info'),
-                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
-            ]
-            )
-                
-    except KeyError:
-        grpid = await active_connection(str(message.from_user.id))
-        await save_group_settings(grpid, 'auto_delete', True)
-        settings = await get_settings(message.chat.id)
-        if settings['auto_delete']:
-            btn.insert(0, 
-            [
-                InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 Tips', 'info'),
-                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
-            ]
-            )
-
-        else:
-            btn.insert(0, 
-            [
-                InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 Tips', 'info'),
-                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
-            ]
-            )
 
     if offset != "":
         key = f"{message.chat.id}-{message.id}"
@@ -1112,6 +1070,13 @@ async def auto_filter(client, msg, spoll=False):
         btn.append(
             [InlineKeyboardButton(text="🗓 No More Pages Available 1/1", callback_data="pages")]
         )
+    btn.insert(0, 
+        [
+        InlineKeyboardButton(f'😇 Info', 'tips'),
+        InlineKeyboardButton(f'📝 Tips', 'info'),
+        InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
+        ],
+    )
     btn.insert(0, [
         InlineKeyboardButton('😎 Group', url='https://t.me/HMTD_Discussion_Group'),
         InlineKeyboardButton('☺️ Share', url='https://t.me/share/url?url=I%27m%20an%20UK%20Movies%20Official%20Auto%20Filter%20Bot%20%28Movie%20Search%20Bot%29.%20Just%20Search%20Then%20You%20Can%20Get%20Files..%E2%9D%A4%EF%B8%8F%0A%0A%F0%9F%93%A2%20Join%20Our%20Update%20Channel%20%3A-%0A%40UK_Movies_Zone_Updates%0A%0A%F0%9F%94%A5%20Powered%20By%20%3A-%0A%40UK_Studios_Official%0A%40HMTD_Links%0A%20%20%0A%F0%9F%91%87%20Join%20%3A-%0A%20https%3A//t.me/UK_Movies_Zone'),
