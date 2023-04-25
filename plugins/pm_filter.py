@@ -62,7 +62,6 @@ async def give_filter(client, message):
     if k == False:
         await auto_filter(client, message)
 
-
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
     ident, req, key, offset = query.data.split("_")
@@ -74,7 +73,7 @@ async def next_page(bot, query):
         offset = 0
     search = BUTTONS.get(key)
     if not search:
-        await query.answer("You are Using one of My old Messages, Please Send the Request Again.", show_alert=True)
+        await query.answer("You are Using One of My Old Messages, Please Send the Request Again.", show_alert=True)
         return
 
     files, n_offset, total = await get_search_results(search, offset=offset, filter=True)
@@ -91,7 +90,7 @@ async def next_page(bot, query):
             [
                 InlineKeyboardButton(
                     text=f"[{get_size(file.file_size)}] {file.file_name}", 
-                    url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
+                    url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
             ]
             for file in files
@@ -101,11 +100,11 @@ async def next_page(bot, query):
             [
                 InlineKeyboardButton(
                     text=f"[{get_size(file.file_size)}] {file.file_name}", 
-                    url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
+                    url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
                 InlineKeyboardButton(
                     text=f"[{get_size(file.file_size)}] {file.file_name}", 
-                    url=await get_shortlink(f"https://telegram.dog/{temp.U_NAME}?start=files_{file.file_id}")
+                    url=await get_shortlink(f"https://telegram.me/{temp.U_NAME}?start=files_{file.file_id}")
                 ),
             ]
             for file in files
@@ -116,108 +115,51 @@ async def next_page(bot, query):
             InlineKeyboardButton(text="⚡ How to Download ⚡", url='https://t.me/UK_Movies_Zone_Updates')
         ]
     )
-    try:
-        if settings['auto_delete']:
-            btn.insert(0, 
-            [
-                InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 Tips', 'info'),
-                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
-            ]
-            )
 
-        else:
-            btn.insert(0, 
+    if 0 < offset <= 10:
+        off_set = 0
+    elif offset == 0:
+        off_set = None
+    else:
+        off_set = offset - 10
+    if n_offset == 0:
+        btn.append(
+            [InlineKeyboardButton("⬅️ Back", callback_data=f"next_{req}_{key}_{off_set}"),
+             InlineKeyboardButton(f"📃 Pages {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}",
+                                  callback_data="pages")]
+        )
+    elif off_set is None:
+        btn.append(
+            [InlineKeyboardButton(f"🗓 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
+             InlineKeyboardButton("Next ➡️", callback_data=f"next_{req}_{key}_{n_offset}")])
+    else:
+        btn.append(
             [
-                InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 Tips', 'info'),
-                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
-            ]
-            )
-                
-    except KeyError:
-        grpid = await active_connection(str(query.message.from_user.id))
-        await save_group_settings(grpid, 'auto_delete', True)
-        settings = await get_settings(query.message.chat.id)
-        if settings['auto_delete']:
-            btn.insert(0, 
-            [
-                InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 Tips', 'info'),
-                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
-            ]
-            )
-
-        else:
-            btn.insert(0, 
-            [
-                InlineKeyboardButton(f'😇 Info', 'tips'),
-                InlineKeyboardButton(f'📝 Tips', 'info'),
-                InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
-            ]
-            )
+                InlineKeyboardButton("⬅️ Back", callback_data=f"next_{req}_{key}_{off_set}"),
+                InlineKeyboardButton(f"🗓 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
+                InlineKeyboardButton("Next ➡️", callback_data=f"next_{req}_{key}_{n_offset}")
+            ],
+        )
+    btn.insert(0, 
+        [
+        InlineKeyboardButton(f'😇 Info', 'tips'),
+        InlineKeyboardButton(f'📝 Tips', 'info'),
+        InlineKeyboardButton(f'🎬 {search} 🎬', 'rkbtn')
+        ],
+    )
+    btn.insert(0, [
+        InlineKeyboardButton('😎 Group', url='https://t.me/HMTD_Discussion_Group'),
+        InlineKeyboardButton('☺️ Share', url='https://t.me/share/url?url=I%27m%20an%20UK%20Movies%20Official%20Auto%20Filter%20Bot%20%28Movie%20Search%20Bot%29.%20Just%20Search%20Then%20You%20Can%20Get%20Files..%E2%9D%A4%EF%B8%8F%0A%0A%F0%9F%93%A2%20Join%20Our%20Update%20Channel%20%3A-%0A%40UK_Movies_Zone_Updates%0A%0A%F0%9F%94%A5%20Powered%20By%20%3A-%0A%40UK_Studios_Official%0A%40HMTD_Links%0A%20%20%0A%F0%9F%91%87%20Join%20%3A-%0A%20https%3A//t.me/UK_Movies_Zone'),
+        InlineKeyboardButton('📢 Channel', url='https://t.me/UK_Movies_Zone_Updates')
+        ]
+    )
     try:
-        settings = await get_settings(query.message.chat.id)
-        if settings['max_btn']:
-            if 0 < offset <= 10:
-                off_set = 0
-            elif offset == 0:
-                off_set = None
-            else:
-                off_set = offset - 10
-            if n_offset == 0:
-                btn.append(
-                    [InlineKeyboardButton("⬅️ Back", callback_data=f"next_{req}_{key}_{off_set}"), InlineKeyboardButton(f"{math.ceil(int(offset)/10)+1} / {math.ceil(total/10)}", callback_data="pages")]
-                )
-            elif off_set is None:
-                btn.append([InlineKeyboardButton("📃 Pages ", callback_data="pages"), InlineKeyboardButton(f"{math.ceil(int(offset)/10)+1} / {math.ceil(total/10)}", callback_data="pages"), InlineKeyboardButton("Next ➡️", callback_data=f"next_{req}_{key}_{n_offset}")])
-            else:
-                btn.append(
-                    [
-                        InlineKeyboardButton("⬅️ Back", callback_data=f"next_{req}_{key}_{off_set}"),
-                        InlineKeyboardButton(f"🗓 {math.ceil(int(offset)/10)+1} / {math.ceil(total/10)}", callback_data="pages"),
-                        InlineKeyboardButton("Next ➡️", callback_data=f"next_{req}_{key}_{n_offset}")
-                    ],
-                )
-        else:
-            if 0 < offset <= int(MAX_B_TN):
-                off_set = 0
-            elif offset == 0:
-                off_set = None
-            else:
-                off_set = offset - int(MAX_B_TN)
-            if n_offset == 0:
-                btn.append(
-                    [InlineKeyboardButton("⬅️ Back", callback_data=f"next_{req}_{key}_{off_set}"),
-                     InlineKeyboardButton(f"📃 Pages {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}",
-                                        callback_data="pages")]
-                )
-            elif off_set is None:
-                btn.append(
-                    [InlineKeyboardButton(f"🗓 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
-                     InlineKeyboardButton("Next ➡️", callback_data=f"next_{req}_{key}_{n_offset}")])
-            else:
-                btn.append(
-                    [
-                        InlineKeyboardButton("⬅️ Back", callback_data=f"next_{req}_{key}_{off_set}"),
-                        InlineKeyboardButton(f"🗓 {math.ceil(int(offset) / 10) + 1} / {math.ceil(total / 10)}", callback_data="pages"),
-                        InlineKeyboardButton("Next ➡️", callback_data=f"next_{req}_{key}_{n_offset}")
-                    ],
-                )
-            btn.insert(0, 
-                [
-                    InlineKeyboardButton('😎 Group', url='https://t.me/HMTD_Discussion_Group'),
-                    InlineKeyboardButton('☺️ Share', url='https://t.me/share/url?url=I%27m%20an%20UK%20Movies%20Official%20Auto%20Filter%20Bot%20%28Movie%20Search%20Bot%29.%20Just%20Search%20Then%20You%20Can%20Get%20Files..%E2%9D%A4%EF%B8%8F%0A%0A%F0%9F%93%A2%20Join%20Our%20Update%20Channel%20%3A-%0A%40UK_Movies_Zone_Updates%0A%0A%F0%9F%94%A5%20Powered%20By%20%3A-%0A%40UK_Studios_Official%0A%40HMTD_Links%0A%20%20%0A%F0%9F%91%87%20Join%20%3A-%0A%20https%3A//t.me/UK_Movies_Zone'),
-                    InlineKeyboardButton('📢 Channel', url='https://t.me/UK_Movies_Zone_Updates')
-                ]
-            )
-            try:
-                await query.edit_message_reply_markup(
-                    reply_markup=InlineKeyboardMarkup(btn)
-                )
-            except MessageNotModified:
-                pass
-            await query.answer()
+        await query.edit_message_reply_markup(
+            reply_markup=InlineKeyboardMarkup(btn)
+        )
+    except MessageNotModified:
+        pass
+    await query.answer()
 
 
 @Client.on_callback_query(filters.regex(r"^spolling"))
