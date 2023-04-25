@@ -1095,14 +1095,6 @@ async def stickerid(bot, message):
        await message.reply("<b>Oops !! Not a sticker file</b>")
 
 @Client.on_message(filters.private & filters.command(["translate"]))
-async def echo(client, message): 
-    await message.reply_text(
-        script.TRANSLATED_MSG,
-        reply_markup = GROUP_LANGUAGE,
-        quote = True
-    )
-
-@Client.on_message(filters.private & filters.command(["translate"]))
 async def echo(client, message):
 	keybord1= InlineKeyboardMarkup( [
         [   InlineKeyboardButton("Tamil",callback_data = "ta"),
@@ -1349,17 +1341,17 @@ async def translate_text(bot,update):
       tr_text = update.message.reply_to_message.text
       cb_data = update.data
       if cb_data== "page2":
-      	await update.message.edit("Select language 👇",reply_markup = keybord2)
+      	await update.message.edit("Select Language 👇🏻",reply_markup = keybord2)
       elif cb_data == "page1":
-      	await update.message.edit("Select language 👇",reply_markup =keybord1)
+      	await update.message.edit("Select Language 👇🏻",reply_markup =keybord1)
       elif cb_data =="page3":
-      	await update.message.edit("Select language 👇",reply_markup =keybord3)
+      	await update.message.edit("Select Language 👇🏻",reply_markup =keybord3)
       elif cb_data == "page4":
-      	await update.message.edit("Select language 👇",reply_markup =keybord4)
+      	await update.message.edit("Select Language 👇🏻",reply_markup =keybord4)
       elif cb_data =="page5":
-      	await update.message.edit("Select language 👇",reply_markup =keybord5)
+      	await update.message.edit("Select Language 👇🏻",reply_markup =keybord5)
       elif cb_data =="page6":
-      	await update.message.edit("Select language 👇",reply_markup =keybord6)
+      	await update.message.edit("Select Language 👇🏻",reply_markup =keybord6)
       else :
       		try:
       			translator = Translator()
@@ -1380,7 +1372,7 @@ async def translate_text(bot,update):
 @Client.on_message(filters.private &filters.command(['unset']))
 async def unsetlg(client,message):
 	unset(int(message.chat.id))
-	await message.reply_text("**Successfully removed custom default language**")
+	await message.reply_text("**Successfully Removed Custom Default Language**")
 
 @Client.on_message(filters.private & filters.command(['set']))
 async def setlg(client,message):
@@ -1394,12 +1386,12 @@ async def setlg(client,message):
     	    		try:
     	    			lgcd = list[cd]
     	    		except:
-    	    			await message.reply_text("❗️ This language Not available in My List \n Or Check Your spelling 😉",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Check List 📑" ,url="https://raw.githubusercontent.com/lntechnical2/Google-Translater-/main/List/list.txt")]]))
+    	    			await message.reply_text("**❗️ This Language Not Available in My List \n Or Check Your Spelling 😉**",reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("Check List 📑" ,url="https://raw.githubusercontent.com/lntechnical2/Google-Translater-/main/List/list.txt")]]))
     	    			return
     	    		set(user_id,lgcd)
-    	    		await message.reply_text(f"Successfully set custom default language **{cd}**")
+    	    		await message.reply_text(f"**Successfully set Custom Default Language {cd}**")
     	    else:
-    	    		await message.reply_text(" Please use this Command with an argument. \n **For Example :- /set Tamil**",reply_markup=InlineKeyboardMarkup([[	InlineKeyboardButton("How To Use",url = "https://youtu.be/dUYvenXiYKE")]]))
+    	    		await message.reply_text("**Please use this Command with an Argument. \nFor Example :- /set Tamil**",reply_markup=InlineKeyboardMarkup([[	InlineKeyboardButton("How To Use",url = "https://youtu.be/dUYvenXiYKE")]]))
 
 @Client.on_message(filters.command(["password"]))
 async def password(bot, update):
@@ -1559,7 +1551,7 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
                 message_id=message_id,
                 text="hy",
             )
-    elif query == "generate":
+    elif query == "string_session":
         await callback_query.message.reply(
             "Please choose the python library you want to generate string session for",
             reply_markup=InlineKeyboardMarkup([[
@@ -1576,6 +1568,15 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
                 await generate_session(bot, callback_query.message, telethon=True)
         except Exception as e:
             await callback_query.message.reply(ERROR_MESSAGE.format(str(e)))
+
+def convert(text):
+    audio = BytesIO()
+    i = Translator().translate(text, dest="en")
+    lang = i.src
+    tts = gTTS(text, lang=lang)
+    audio.name = lang + ".mp3"
+    tts.write_to_fp(audio)
+    return audio
 
 @Client.on_message(filters.command("text2speech"))
 async def text_to_speech(_, message: Message):
