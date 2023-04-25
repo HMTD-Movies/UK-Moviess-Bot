@@ -41,7 +41,7 @@ async def fil_mod(client, message):
 
       try: 
          args = message.text.split(None, 1)[1].lower() 
-      except: 
+      except Exception : 
          return await message.reply("<b>Incomplete Command...</b>")
       
       m = await message.reply("<b>Settings...</b>")
@@ -69,7 +69,7 @@ async def next_page(bot, query):
         return await query.answer("OKda", show_alert=True)
     try:
         offset = int(offset)
-    except:
+    except Exception:
         offset = 0
     search = BUTTONS.get(key)
     if not search:
@@ -367,7 +367,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         )
                     ]
                 )
-            except:
+            except Exception :
                 pass
         if buttons:
             await query.message.edit_text(
