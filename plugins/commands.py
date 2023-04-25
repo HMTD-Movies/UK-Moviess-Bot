@@ -1395,14 +1395,14 @@ async def password(bot, update):
     limit = int(qw)
     random_value = "".join(random.sample(password, limit))
     txt = f"<b>Limit:</b> {str(limit)} \n<b>Password: <code>{random_value}</code>"
-    btn = InlineKeyboardMarkup([[InlineKeyboardButton('Mᴋɴ Bᴏᴛᴢ™️', url='https://t.me/HMTD_Links')]])
+    btn = InlineKeyboardMarkup([[InlineKeyboardButton('UK Movies', url='https://t.me/HMTD_Links')]])
     await message.edit_text(text=txt, reply_markup=btn, parse_mode=enums.ParseMode.HTML)
 
 @Client.on_message(filters.command("alive"))
 async def check_alive(_, message):
     await message.reply_text("**Hello 👋🏻 Bro**")
 
-@Client.on_message(filters.private & filters.command('string_session'))
+@Client.on_message(filters.private & filters.command('generate'))
 async def main(_, msg):
     await msg.reply(
         "Please choose the python library you want to generate string session for",
@@ -1541,7 +1541,7 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
                 message_id=message_id,
                 text="hy",
             )
-    elif query == "string_session":
+    elif query == "generate":
         await callback_query.message.reply(
             "Please choose the python library you want to generate string session for",
             reply_markup=InlineKeyboardMarkup([[
@@ -1621,7 +1621,7 @@ async def song(client, message):
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
 
-        cap = "**BY›› [Mᴋɴ Bᴏᴛᴢ™](https://t.me/mkn_bots_updates)**"
+        cap = "**BY›› [UK Movies](https://t.me/HMTD_Links)**"
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
