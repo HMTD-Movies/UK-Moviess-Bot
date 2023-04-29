@@ -22,7 +22,7 @@ from database.filters_mdb import (
     get_filters,
 )
 import traceback
-from data import Data
+from plugins.data import Data
 from pyrogram import Client
 from pyrogram.types import CallbackQuery, InlineKeyboardMarkup
 from plugins.commands import generate_session, ask_ques, buttons_ques
