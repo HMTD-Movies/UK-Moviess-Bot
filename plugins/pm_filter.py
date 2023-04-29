@@ -21,6 +21,11 @@ from database.filters_mdb import (
     find_filter,
     get_filters,
 )
+import traceback
+from data import Data
+from pyrogram import Client
+from pyrogram.types import CallbackQuery, InlineKeyboardMarkup
+from plugins.commands import generate_session, ask_ques, buttons_ques
 
 import os
 req_channel = int(os.environ.get('REQ_CHANNEL', '-1001831802226'))
@@ -33,6 +38,12 @@ logger.setLevel(logging.ERROR)
 BUTTONS = {}
 SPELL_CHECK = {}
 FILTER_MODE = {}
+
+ERROR_MESSAGE = "Oops! An exception occurred! \n\n**Error** : {} " \
+            "\n\nPlease visit @StarkBotsChat if this message doesn't contain any " \
+            "sensitive information and you if want to report this as " \
+            "this error message is not being logged by us!"
+
 
 @Client.on_message(filters.command('autofilter'))
 async def fil_mod(client, message): 
@@ -615,6 +626,34 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
+    elif query == "generate":
+        await callback_query.answer()
+        await callback_query.message.reply(ask_ques, reply_markup=InlineKeyboardMarkup(buttons_ques))
+    elif query.startswith("pyrogram") or query.startswith("telethon"):
+        try:
+            if query == "pyrogram":
+                #await callback_query.answer("Please note that the new type of string sessions may not work in all bots, i.e, only the bots that have been updated to pyrogram v2 will work!", show_alert=True)
+                await generate_session(bot, callback_query.message)
+                """
+            # Maybe in future it'll come back.
+            elif query == "pyrogram1":
+                await callback_query.answer()
+                await generate_session(bot, callback_query.message, old_pyro=True)
+                """
+            elif query == "pyrogram_bot":
+                await callback_query.answer("Please note that this bot session will be of pyrogram v2", show_alert=True)
+                await generate_session(bot, callback_query.message, is_bot=True)
+            elif query == "telethon_bot":
+                await callback_query.answer()
+                await generate_session(bot, callback_query.message, telethon=True, is_bot=True)
+            elif query == "telethon":
+                await callback_query.answer()
+                await generate_session(bot, callback_query.message, telethon=True)
+        except Exception as e:
+            print(traceback.format_exc())
+            print(e)
+            await callback_query.message.reply(ERROR_MESSAGE.format(str(e)))
+
     elif query.data.startswith("killfilesdq"):
         ident, keyword = query.data.split("#")
         await query.message.edit_text(f"<b>Fetching Files for Your Query {keyword} on DB... Please wait...</b>")
